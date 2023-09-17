@@ -2,13 +2,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import logoimg from '../assets/logo.svg'
-
+import HomeIcon from '@mui/icons-material/Home';
 const Container = styled.div`
     flex:1;
     background: #202020;
     height: 100vh;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
 `
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -40,6 +40,7 @@ function Menu() {
             Vader
         </Logo>
         <Item>
+            <HomeIcon />
             Home
         </Item>
        </Wrapper>
