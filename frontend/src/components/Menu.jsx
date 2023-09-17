@@ -8,7 +8,7 @@ const Container = styled.div`
     background: #202020;
     height: 100vh;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
 `
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -19,6 +19,7 @@ const Logo = styled.div`
     gap: 5px;
     font-weight: bold;
     margin-bottom: 25px;
+    cursor: pointer;
 `
 const Img = styled.img`
     height: 30px;
@@ -29,6 +30,9 @@ const Item = styled.div`
     gap: 20px;
     cursor: pointer;
 
+    &:hover{
+        color: #3ac6a6;
+    }
 `
 
 function Menu() {
@@ -37,7 +41,7 @@ function Menu() {
        <Wrapper>
         <Logo>
             <Img src={logoimg}/>
-            Vader
+            <h2>Vider</h2>
         </Logo>
         <Item>
             <HomeIcon />
