@@ -8,7 +8,7 @@ const Container = styled.div`
     background: #202020;
     height: 100vh;
     color: white;
-    font-size: 14px;
+    font-size: 18px;
 `
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -21,7 +21,14 @@ const Logo = styled.div`
     margin-bottom: 25px;
 `
 const Img = styled.img`
-    height: 25px;
+    height: 30px;
+`
+const Item = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+
 `
 
 function Menu() {
@@ -30,8 +37,11 @@ function Menu() {
        <Wrapper>
         <Logo>
             <Img src={logoimg}/>
-            Video
+            Vader
         </Logo>
+        <Item>
+            Home
+        </Item>
        </Wrapper>
     </Container>
   );
