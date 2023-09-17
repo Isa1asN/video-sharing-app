@@ -10,7 +10,7 @@ const Container = styled.div`
 
 `
 const Main = styled.div`
-  flex:7
+  flex:7;
 `
 const Body = styled.div``
 
