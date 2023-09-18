@@ -1,20 +1,25 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Container = styled.div`
-    width: 300px;
+    width: ${(props) => props.type !== 'sm' && '300px'};
     cursor: pointer;
-    margin-bottom: 45px;
+    margin-bottom: ${(props) => props.type === 'sm' ? '10px' : '45px'};
+    display: ${(props) => props.type === 'sm' && 'flex'};
 `
 const Image = styled.img`
     width: 100%;
-    height: 200px;
+    height:${(props) => props.type === 'sm' ? '100px' : '200px'};
     background: #999;
+    flex: 1;
 `
 const Details = styled.div`
     display: flex;
-    margin-top: 15px;
+    margin-top: ${(props) => props.type !== 'sm' && '15px'};
     gap: 12px;
+    flex: 1;
+    margin-left: ${(props) => props.type === 'sm' && '7px'};
 `
 const ChannelImage = styled.img`
     width: 36px;
@@ -22,6 +27,7 @@ const ChannelImage = styled.img`
     border-radius: 50%;
     background-color: #363e2b;
     border: 1.7px solid #3ac6a6;
+    display: ${(props) => props.type === 'sm' && 'none'};
 `
 const Texts = styled.div`
 
@@ -44,13 +50,13 @@ const Info = styled.div`
 
 `
 
-function Card() {
+function Card({type}) {
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
-    <Container >
-      <Image />
-      <Details>
-          <ChannelImage />
+    <Container type={type} >
+      <Image type={type} />
+      <Details type={type}>
+          <ChannelImage type={type}/>
           <Texts>
             <Title>Test </Title>
             <ChannelName > Esu presents</ChannelName>

@@ -4,6 +4,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
 import propic from '../assets/c.jpg'
 import Comments from "../components/Comments";
+import Card from "../components/Card";
 
 const Container = styled.div`
   display: flex;
@@ -70,7 +71,7 @@ const ChannelName = styled.span`
 `
 const FollowButton = styled.button`
   background-color: #3ac6a6 ;
-  font-weight: 500;
+  font-weight: 700;
   color: white;
   border: none;
   border-radius: 6px;
@@ -127,7 +128,9 @@ function Video() {
         <Comments />
       </Content>
       <Recommendation>
-        recommendation
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
       </Recommendation>
     </Container>
   )
