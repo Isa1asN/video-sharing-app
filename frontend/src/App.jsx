@@ -18,7 +18,9 @@ const Main = styled.div`
   flex:7;
   background-color: ${({theme}) => theme.bg};
 `
-const Body = styled.div``
+const Body = styled.div`
+  padding: 22px 46px;
+`
 
 
 function App() {
