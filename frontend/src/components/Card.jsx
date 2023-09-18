@@ -54,7 +54,7 @@ function Card() {
           <Texts>
             <Title>Test </Title>
             <ChannelName > Esu presents</ChannelName>
-            <Info>1020 views * 2 days ago</Info>
+            <Info>1020 views | 2 days ago</Info>
           </Texts>
       </Details>
     </Container>

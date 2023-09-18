@@ -79,10 +79,12 @@ function Menu({darkmode, setDarkmode}) {
             <h2>Vidlit</h2>
         </Logo>
         </Link>
+        <Link to={'/'} style={{textDecoration:'none', color: 'inherit'}}>
         <Item>
             <HomeIcon />
             Home
         </Item>
+        </Link>
         <hr style={{border:'0.5px solid #373737'}} />
         <Item>
             <VideoLibraryIcon />
