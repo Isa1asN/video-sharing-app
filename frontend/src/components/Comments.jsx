@@ -3,9 +3,9 @@ import Comment from "./Comment"
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
 `
-const newComment = styled.div`
+const NewComment = styled.div`
     
 `
 const Avatar = styled.img`
@@ -22,16 +22,16 @@ const Input = styled.input`
     outline: none;
     padding: 5px;
     border-radius: 5px;
-    /* width: 100%; */
+    width: 100%;
 `
 
 function Comments() {
   return (
     <Container>
-        <newComment>
+        <NewComment>
             <Avatar />
             <Input placeholder="write a comment"/>
-        </newComment>
+        </NewComment>
         <Comment />
         <Comment />
         <Comment />
