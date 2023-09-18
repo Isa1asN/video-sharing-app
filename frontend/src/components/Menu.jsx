@@ -12,6 +12,7 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import StarsIcon from '@mui/icons-material/Stars';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
@@ -93,6 +94,10 @@ function Menu({darkmode, setDarkmode}) {
         <Item>
             <AccessTimeIcon />
             Watch later
+        </Item>
+        <Item>
+            <StarsIcon />
+            Following
         </Item>
         <Item>
             <FavoriteBorderIcon />
