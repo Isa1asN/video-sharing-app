@@ -29,6 +29,7 @@ const Search = styled.div`
     justify-content: space-between;
     padding: 5px;
     border: 1px solid #ccc;
+    border-radius: 16px;
 
   
 `
@@ -37,6 +38,8 @@ const Input = styled.input`
     background: transparent;
     width: 100%;
     height: 100%;
+    outline: none;
+    color: ${({theme}) => theme.text};
 `
 const Loginbtn = styled.button`
     background-color: transparent;
