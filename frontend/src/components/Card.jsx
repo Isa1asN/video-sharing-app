@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -44,7 +45,8 @@ const Info = styled.div`
 
 function Card() {
   return (
-    <Container>
+    <Link to={'video/test'} style={{textDecoration:'none'}}>
+    <Container >
       <Image />
       <Details>
           <ChannelImage />
@@ -55,6 +57,7 @@ function Card() {
           </Texts>
       </Details>
     </Container>
+    </Link>
   )
 }
 
