@@ -2,6 +2,7 @@ import styled from "styled-components"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
+import propic from '../assets/c.jpg'
 
 const Container = styled.div`
   display: flex;
@@ -48,12 +49,47 @@ const Channel = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const ChannelInfo = styled.div``
-const Image = styled.img``
-const ChannelDetail = styled.div``
-const ChannelName = styled.span``
-const ChannelCounter = styled.span``
-const Description = styled.p``
+const ChannelInfo = styled.div`
+  display: flex;
+  gap: 20px;
+`
+const Image = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #231ddc;
+`
+const ChannelDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${({theme}) => theme.text};
+`
+const ChannelName = styled.span`
+  font-weight: 500;
+`
+const FollowButton = styled.button`
+  background-color: #3ac6a6 ;
+  font-weight: 500;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  height: max-content;
+  padding: 10px 20px;
+  cursor: pointer;
+`
+const ChannelCounter = styled.span`
+  margin-top: 5px;
+  margin-bottom: 15px;
+  color: ${({theme}) => theme.textSof};
+  font-size: 13px;
+`
+const Description = styled.p`
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 100%;
+  background-color:  ${({theme}) => theme.bgLi};
+`
 
 
 function Video() {
@@ -75,15 +111,16 @@ function Video() {
         <hr />
         <Channel>
           <ChannelInfo>
-            <Image />
+            <Image src={propic} />
             <ChannelDetail>
               <ChannelName>Esu presents</ChannelName>
-              {/* <ChannelCounter>3002 followers</ChannelCounter> */}
+              <ChannelCounter>3002 Followers</ChannelCounter>
               <Description>
-                Lorem ipsum dolor lore m ipsu m 
+                Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m 
               </Description>
             </ChannelDetail>
           </ChannelInfo>
+              <FollowButton>Follow</FollowButton>
         </Channel>
       </Content>
       <Recommendation>
