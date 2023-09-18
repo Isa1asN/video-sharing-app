@@ -20,7 +20,7 @@ const Details = styled.div`
 const Name = styled.span`
     font-size: 13px;
     font-weight: 500;
-    
+
 `
 const Date = styled.span`
     font-size: 12px;
@@ -42,7 +42,7 @@ function Comment() {
                 <Date>2 days ago</Date>
             </Name>
             <Text>
-                Lorem ipsum dolor oidho donn  on o
+                Lorem ipsum dolor oidho donn  on oghrrrrry tvuv 
             </Text>
         </Details>
     </Container>
