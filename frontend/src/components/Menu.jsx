@@ -12,6 +12,7 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     flex:1.3;
@@ -72,10 +73,12 @@ function Menu({darkmode, setDarkmode}) {
   return (
     <Container>
        <Wrapper>
+        <Link to={'/'} style={{textDecoration:"none", color:'inherit'}}>
         <Logo>
             <Img src={logoimg}/>
             <h2>Vidlit</h2>
         </Logo>
+        </Link>
         <Item>
             <HomeIcon />
             Home

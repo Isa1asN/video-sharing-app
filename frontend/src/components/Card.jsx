@@ -20,7 +20,8 @@ const ChannelImage = styled.img`
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: greenyellow;
+    background-color: #363e2b;
+    border: 1.7px solid #3ac6a6;
 `
 const Texts = styled.div`
 
