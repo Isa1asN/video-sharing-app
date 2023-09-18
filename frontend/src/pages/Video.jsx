@@ -3,6 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
 import propic from '../assets/c.jpg'
+import Comments from "../components/Comments";
 
 const Container = styled.div`
   display: flex;
@@ -122,6 +123,8 @@ function Video() {
           </ChannelInfo>
               <FollowButton>Follow</FollowButton>
         </Channel>
+        <hr />
+        <Comments />
       </Content>
       <Recommendation>
         recommendation
