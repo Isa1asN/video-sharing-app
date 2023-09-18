@@ -78,6 +78,9 @@ const FollowButton = styled.button`
   height: max-content;
   padding: 10px 20px;
   cursor: pointer;
+  &:hover{
+    background-color: #197d65;
+  }
 `
 const ChannelCounter = styled.span`
   margin-top: 5px;
