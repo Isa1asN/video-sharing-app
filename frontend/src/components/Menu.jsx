@@ -8,6 +8,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import HistoryIcon from '@mui/icons-material/History';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import './menucss.css'
 
 const Container = styled.div`
@@ -16,6 +17,8 @@ const Container = styled.div`
     height: 100vh;
     color: white;
     font-size: 14px;
+    position: sticky;
+    top: 0;
 `
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -47,11 +50,20 @@ const Login = styled.div`
 `
 const Loginbtn = styled.button`
     background-color: transparent;
-    color: white;
+    color: #3ac6a6;
     padding: 5px 10px;
     border: 1px solid #3ac6a6;
     cursor: pointer;
     font-weight: 500;
+    margin: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    &:hover{
+        background-color: #3ac6a6;
+        color: black;
+    }
+
 `
 
 function Menu() {
@@ -89,9 +101,14 @@ function Menu() {
         </Item>
         <hr style={{border:'0.5px solid #373737'}} />
         <Login>
-            Sign in to like videos and comment
-            <Loginbtn>Sign in</Loginbtn>
+            Sign in to like videos & comment
+            <Loginbtn> <AccountCircleIcon /> Sign in</Loginbtn>
         </Login>
+        <hr style={{border:'0.5px solid #373737'}} />
+        <Item>
+            {/* <SettingsIcon /> */}
+            Dark mode
+        </Item>
        </Wrapper>
     </Container>
   );

@@ -11,6 +11,7 @@ const Container = styled.div`
 `
 const Main = styled.div`
   flex:7;
+  background-color: #181818;
 `
 const Body = styled.div``
 
