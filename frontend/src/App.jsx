@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-target-blank */
 import './App.css'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import Menu from './components/Menu';
 import Navbar from './components/Navbar';
+import { darkTheme, lightTheme } from './utils/theme';
+import { useState } from 'react';
 
 const Container = styled.div`
   display:flex;
@@ -11,22 +13,31 @@ const Container = styled.div`
 `
 const Main = styled.div`
   flex:7;
-  background-color: #181818;
+  background-color: ${({theme}) => theme.bg};
 `
 const Body = styled.div``
 
+
 function App() {
+  const [darkmode, setDarkmode] = useState(1)
 
   return (
-    <Container>
-      <Menu />
+    <ThemeProvider theme={darkmode ? darkTheme : lightTheme}>
+    <Container >
+      <Menu darkmode={darkmode} setDarkmode={setDarkmode} />
       <Main>
         <Navbar />
         <Body>
-          vids
+          <div>vides</div>
+          <div>vides</div>
+          <div>vides</div>
+          <div>vides</div>
+          <div>vides</div>
+          <div>vides</div>
         </Body>
       </Main>
     </Container>
+    </ThemeProvider>
   );
 }
 

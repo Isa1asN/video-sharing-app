@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import styled from 'styled-components'
@@ -9,13 +10,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import HistoryIcon from '@mui/icons-material/History';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import './menucss.css'
 
 const Container = styled.div`
     flex:1.3;
-    background: #202020;
+    background: ${({theme}) => theme.bgLi};
     height: 100vh;
-    color: white;
+    color: ${({theme}) => theme.text};
     font-size: 14px;
     position: sticky;
     top: 0;
@@ -66,7 +69,7 @@ const Loginbtn = styled.button`
 
 `
 
-function Menu() {
+function Menu({darkmode, setDarkmode}) {
   return (
     <Container>
        <Wrapper>
@@ -105,8 +108,8 @@ function Menu() {
             <Loginbtn> <AccountCircleIcon /> Sign in</Loginbtn>
         </Login>
         <hr style={{border:'0.5px solid #373737'}} />
-        <Item>
-            {/* <SettingsIcon /> */}
+        <Item onClick={() => setDarkmode(!darkmode)}>
+            {darkmode ? <ToggleOnIcon /> : <ToggleOffIcon />}
             Dark mode
         </Item>
        </Wrapper>
