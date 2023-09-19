@@ -114,7 +114,11 @@ function Menu({darkmode, setDarkmode}) {
         <hr style={{border:'0.5px solid #373737'}} />
         <Login>
             Sign in to like videos & comment
-            <Loginbtn> <AccountCircleIcon /> Sign in</Loginbtn>
+            <Link to={'signin'} style={{textDecoration:'none', color:'inherit'}}>
+            <Loginbtn> 
+                <AccountCircleIcon /> Sign in
+            </Loginbtn>
+            </Link>
         </Login>
         <hr style={{border:'0.5px solid #373737'}} />
         <Item onClick={() => setDarkmode(!darkmode)}>
