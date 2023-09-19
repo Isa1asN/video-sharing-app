@@ -18,6 +18,8 @@ const Wrapper = styled.div`
     gap: 10px;
     width: 30%;
     height: 60%;
+    border-radius: 50px;
+    box-shadow: 4px 4px 1.3px gray;
 `
 const Title = styled.div`
     font-size: 24px;
