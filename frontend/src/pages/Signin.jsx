@@ -19,15 +19,13 @@ const Wrapper = styled.div`
     gap: 10px;
 `
 const Title = styled.div`
+    font-size: 24px;
     
 `
 const Input = styled.input`
     
 `
 const Button = styled.button`
-    
-`
-const More = styled.div`
     
 `
 
