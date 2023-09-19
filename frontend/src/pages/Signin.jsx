@@ -15,15 +15,27 @@ const Wrapper = styled.div`
     flex-direction: column;
     background-color:  ${({theme}) => theme.bgLi};
     padding: 20px 50px;
-    border: 1px solid ${({theme}) => theme.soft};
     gap: 10px;
+    width: 30%;
+    height: 60%;
 `
 const Title = styled.div`
     font-size: 24px;
-    
+    font-weight: 300;
+
 `
 const Input = styled.input`
-    
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.1px solid ${({theme}) => theme.text};
+    color: ${({theme}) => theme.text};
+    outline: none;
+    width: 70%;
+    padding: 5px 10px;
+    &:focus{
+        transition: 200ms;
+        border-bottom: 2px solid ${({theme}) => theme.text};
+    }
 `
 const Button = styled.button`
     
