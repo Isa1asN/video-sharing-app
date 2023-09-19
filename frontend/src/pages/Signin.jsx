@@ -24,7 +24,6 @@ const Wrapper = styled.div`
 const Title = styled.div`
     font-size: 24px;
     font-weight: 300;
-
 `
 const Input = styled.input`
     background-color: transparent;
