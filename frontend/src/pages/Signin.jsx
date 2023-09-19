@@ -32,6 +32,7 @@ const Input = styled.input`
     outline: none;
     width: 70%;
     padding: 5px 10px;
+    border-radius: 4px;
     &:focus{
         transition: 200ms;
         border-bottom: 2px solid ${({theme}) => theme.text};
