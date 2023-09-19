@@ -39,7 +39,17 @@ const Input = styled.input`
     }
 `
 const Button = styled.button`
-    
+    font-size: 17px;
+    font-weight: 510;
+    background-color:transparent;
+    color: #3ac6a6;
+    border: 1px solid #3ac6a6;
+    border-radius: 10px;
+    padding: 5px 7px;
+    &:hover{
+        background-color: #3ac6a6;
+        color:  ${({theme}) => theme.text};
+    }
 `
 
 function Signin() {
@@ -56,7 +66,7 @@ function Signin() {
             <Input placeholder="username" />
             <Input placeholder="email" />
             <Input type="password" placeholder="password"/>
-            <Button>Sign in</Button>
+            <Button>Sign Up</Button>
             
         </Wrapper>
     </Container>
