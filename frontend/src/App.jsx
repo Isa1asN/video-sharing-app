@@ -12,10 +12,10 @@ import Video from './pages/Video';
 import Signin from './pages/signin';
 
 const Container = styled.div`
-  display:flex;
+  display:flex;       
 
 `
-const Main = styled.div`
+const Main = styled.div`               
   flex:7;
   background-color: ${({theme}) => theme.bg};
 `
