@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import router from './routes/users.js'
 
 dotenv.config()
 
@@ -12,3 +13,5 @@ mongoose
     .then(() => {app.listen(port, () => 
     console.log(`Connected! server running on port ${port}`))})
     .catch((err) => console.log(`${err} Did not connect`))    
+
+app.use('/api/users', router)
