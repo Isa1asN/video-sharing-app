@@ -7,25 +7,8 @@ const Videoschema = new mongoose.Schema(
         required: true,
         unique : true
     },
-    email : {
-        type : String,
-        required: true,
-        unique : true
     },
-    password : {
-        type : String,
-        required: true,
-    },
-    img : {type : String},
-    followers : {
-        type : Number,
-        default : 0
-    },
-    following : {
-        type : [String]
-    },
-    timestamps : true
-}
+    {timestamps : true}
 )
-const User = mongoose.model('Users', Userschema)
+const User = mongoose.model('Users', Videoschema)
 export default User;
