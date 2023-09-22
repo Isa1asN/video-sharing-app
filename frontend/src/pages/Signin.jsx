@@ -4,6 +4,7 @@ import styled from "styled-components"
 import axios from 'axios'
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 
 const client = axios.create({baseURL : 'http://localhost:3004'})
 
@@ -65,16 +66,21 @@ const Form = styled.form`
 
 
 function Signin() {
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate()
     const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [logEmail, setLogEmail] = useState('')
+    const [logPassword, setLogPassword] = useState('')
+    const [signUpEmail, setSignUpEmail] = useState('')
+    const [signUpPassword, setSignUpPassword] = useState('')
     const handleLogin = async (event)=> {
         event.preventDefault()
+        setLoading(true)
         try {
            let response = await client.post('/auth/signin', {
-                email : email,
-                password : password,
+                email : logEmail,
+                password : logPassword,
             }) 
             if(response.status == 200){
                 console.log("Sign in success")
@@ -83,34 +89,41 @@ function Signin() {
         } catch (error) {
             console.log(error)
         }
-        console.log(`email:${email} password:${password}`)}
+        setLoading(false)
+        }
 
     const handleSignUp = (event) => {
         event.preventDefault()
-        console.log(`name: ${name} email: ${email} password: ${password}`)
+        
 
     }
 
   return (
     <Container>
+        {loading ? <Loader
+        type="Puff"
+        color="#3ac6a6"
+        height={100}
+        width={100}
+      /> :   
         <Wrapper>
             <Title>
                 Sign in
             </Title>
             <Form onSubmit={handleLogin} >
-                <Input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                <Input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <Input type="email" placeholder="email" value={logEmail} onChange={(e)=>setLogEmail(e.target.value)}/>
+                <Input type="password" placeholder="password" value={logPassword} onChange={(e)=>setLogPassword(e.target.value)}/>
                 <Button type="submit">Sign in</Button>
             </Form>
             <Title>Or </Title>
             <Form onSubmit={handleSignUp}>
                 <Input placeholder="username" value={name} onChange={(e)=>setName(e.target.value)}/>
-                <Input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                <Input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <Input type="email" placeholder="email" value={signUpEmail} onChange={(e)=>setSignUpEmail(e.target.value)}/>
+                <Input type="password" placeholder="password" value={signUpPassword} onChange={(e)=>setSignUpPassword(e.target.value)}/>
                 <Button type="submit">Sign Up</Button>
             </Form>
             
-        </Wrapper>
+        </Wrapper>}
     </Container>
   )
 }
