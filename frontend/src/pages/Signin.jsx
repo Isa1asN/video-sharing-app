@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 // import React from 'react'
 import styled from "styled-components"
-// import axios from 'axios'
+import axios from 'axios'
 import { useState } from "react"
+import {useNavigate} from 'react-router-dom'
 
-// const client = axios.create({baseURL : 'http://localhost:3004/auth/signin'})
+const client = axios.create({baseURL : 'http://localhost:3004'})
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -63,12 +65,26 @@ const Form = styled.form`
 
 
 function Signin() {
+    const navigate = useNavigate()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const handleLogin = (event)=> {
+    const handleLogin = async (event)=> {
         event.preventDefault()
+        try {
+           let response = await client.post('/auth/signin', {
+                email : email,
+                password : password,
+            }) 
+            if(response.status == 200){
+                console.log("Sign in success")
+                navigate('/') 
+            }
+        } catch (error) {
+            console.log(error)
+        }
         console.log(`email:${email} password:${password}`)}
+
     const handleSignUp = (event) => {
         event.preventDefault()
         console.log(`name: ${name} email: ${email} password: ${password}`)

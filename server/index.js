@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import cors from 'cors'
 import userRoutes from './routes/users.js'
 import commentRoutes from './routes/comments.js'
 import videoRoutes from './routes/videos.js'
@@ -11,6 +12,7 @@ dotenv.config()
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 const port = process.env.PORT || 8000
 mongoose
