@@ -60,7 +60,7 @@ function Signin() {
             <Title>
                 Sign in
             </Title>
-            <Input placeholder="username" />
+            <Input placeholder="email" />
             <Input type="password" placeholder="password"/>
             <Button>Sign in</Button>
             <Title>Or </Title>
