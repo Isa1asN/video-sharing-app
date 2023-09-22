@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     padding: 20px 50px;
     gap: 10px;
     width: 30%;
-    height: 60%;
+    height: 70%;
     border-radius: 50px;
     box-shadow: 4px 4px 1.3px gray;
 `
@@ -69,6 +69,11 @@ function Signin() {
     const handleLogin = (event)=> {
         event.preventDefault()
         console.log(`email:${email} password:${password}`)}
+    const handleSignUp = (event) => {
+        event.preventDefault()
+        console.log(`name: ${name} email: ${email} password: ${password}`)
+
+    }
 
   return (
     <Container>
@@ -82,10 +87,10 @@ function Signin() {
                 <Button type="submit">Sign in</Button>
             </Form>
             <Title>Or </Title>
-            <Form>
-                <Input placeholder="username" />
-                <Input placeholder="email" />
-                <Input type="password" placeholder="password"/>
+            <Form onSubmit={handleSignUp}>
+                <Input placeholder="username" value={name} onChange={(e)=>setName(e.target.value)}/>
+                <Input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <Input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 <Button type="submit">Sign Up</Button>
             </Form>
             
