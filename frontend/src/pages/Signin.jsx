@@ -35,9 +35,8 @@ const Input = styled.input`
     border-bottom: 0.1px solid ${({theme}) => theme.text};
     color: ${({theme}) => theme.text};
     outline: none;
-    width: 70%;
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 1px;
     &:focus{
         transition: 200ms;
         border-bottom: 2px solid ${({theme}) => theme.text};
@@ -45,6 +44,7 @@ const Input = styled.input`
 `
 const Button = styled.button`
     font-size: 17px;
+    margin: 20px 10px;
     font-weight: 510;
     background-color:transparent;
     color: #3ac6a6;
@@ -56,11 +56,19 @@ const Button = styled.button`
         color:  ${({theme}) => theme.text};
     }
 `
-const handleLogin = (email, password)=> console.log(`email:${email} password:${password}`)
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`
+
 
 function Signin() {
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const handleLogin = (event)=> {
+        event.preventDefault()
+        console.log(`email:${email} password:${password}`)}
 
   return (
     <Container>
@@ -68,16 +76,18 @@ function Signin() {
             <Title>
                 Sign in
             </Title>
-            <form onSubmit={handleLogin} >
+            <Form onSubmit={handleLogin} >
                 <Input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 <Input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 <Button type="submit">Sign in</Button>
-            </form>
+            </Form>
             <Title>Or </Title>
-            <Input placeholder="username" />
-            <Input placeholder="email" />
-            <Input type="password" placeholder="password"/>
-            <Button type="submit">Sign Up</Button>
+            <Form>
+                <Input placeholder="username" />
+                <Input placeholder="email" />
+                <Input type="password" placeholder="password"/>
+                <Button type="submit">Sign Up</Button>
+            </Form>
             
         </Wrapper>
     </Container>
