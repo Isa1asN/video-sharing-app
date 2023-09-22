@@ -4,7 +4,7 @@ import styled from "styled-components"
 import axios from 'axios'
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
-import Loader from 'react-loader-spinner'
+import {TailSpin} from 'react-loader-spinner'
 
 const client = axios.create({baseURL : 'http://localhost:3004'})
 
@@ -84,7 +84,10 @@ function Signin() {
             }) 
             if(response.status == 200){
                 console.log("Sign in success")
-                navigate('/') 
+                setTimeout(() => {
+                    navigate("/");
+                    setLoading(false);
+                  }, 3000);
             }
         } catch (error) {
             console.log(error)
@@ -100,12 +103,8 @@ function Signin() {
 
   return (
     <Container>
-        {loading ? <Loader
-        type="Puff"
-        color="#3ac6a6"
-        height={100}
-        width={100}
-      /> :   
+        {loading ? <TailSpin color="#3ac6a6" height={100} width={100}/> 
+        :   
         <Wrapper>
             <Title>
                 Sign in
