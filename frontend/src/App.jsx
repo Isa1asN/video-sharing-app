@@ -9,7 +9,7 @@ import { useState } from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
 import Video from './pages/Video';
-import Signin from './pages/signin';
+import Signin from './pages/Signin';
 
 const Container = styled.div`
   display:flex;       
