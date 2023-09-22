@@ -35,7 +35,7 @@ export const signIn = async (req, res) => {
         res.status(200).json({token : token, user : {_id : user._id,
                                                      name : user.name,
                                                      email : user.email}})
-        console.log("A user signed in")                                                     
+        // console.log("A user signed in")                                                     
     } catch (error) {
         res.status(500).json({error : "couldn't sign in"});
     }

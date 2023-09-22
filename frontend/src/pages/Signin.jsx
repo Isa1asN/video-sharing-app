@@ -85,9 +85,9 @@ function Signin() {
             if(response.status == 200){
                 console.log("Sign in success")
                 setTimeout(() => {
-                    navigate("/");
-                    setLoading(false);
-                  }, 3000);
+                }, 3000);
+                navigate("/");
+                setLoading(false);
             }
         } catch (error) {
             console.log(error)
@@ -95,9 +95,25 @@ function Signin() {
         setLoading(false)
         }
 
-    const handleSignUp = (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault()
-        
+        setLoading(true)
+        try {
+            let response = await client.post('/auth/signup', {
+                name : name,
+                email : signUpEmail,
+                password : signUpPassword
+            })
+            if (response.status == 201){
+                console.log('Signup success')
+                setTimeout(() => {
+                }, 3000);
+                navigate("/");
+                setLoading(false); 
+            }
+        } catch (error) {
+            console.log(error)
+        }
 
     }
 
