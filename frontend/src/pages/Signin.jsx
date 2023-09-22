@@ -1,5 +1,9 @@
 // import React from 'react'
 import styled from "styled-components"
+// import axios from 'axios'
+import { useState } from "react"
+
+// const client = axios.create({baseURL : 'http://localhost:3004/auth/signin'})
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -52,22 +56,28 @@ const Button = styled.button`
         color:  ${({theme}) => theme.text};
     }
 `
+const handleLogin = (email, password)=> console.log(`email:${email} password:${password}`)
 
 function Signin() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
   return (
     <Container>
         <Wrapper>
             <Title>
                 Sign in
             </Title>
-            <Input placeholder="email" />
-            <Input type="password" placeholder="password"/>
-            <Button>Sign in</Button>
+            <form onSubmit={handleLogin} >
+                <Input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <Input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <Button type="submit">Sign in</Button>
+            </form>
             <Title>Or </Title>
             <Input placeholder="username" />
             <Input placeholder="email" />
             <Input type="password" placeholder="password"/>
-            <Button>Sign Up</Button>
+            <Button type="submit">Sign Up</Button>
             
         </Wrapper>
     </Container>
