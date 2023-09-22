@@ -33,8 +33,7 @@ export const signIn = async (req, res) => {
         res.cookie("token", token, {httpOnly : true, secure : true});
         res["token"] = token;
         res.status(200).json({token : token, user : {_id : user._id,
-                                                     firstName : user.firstName,
-                                                     lastName : user.lastName,
+                                                     name : user.name,
                                                      email : user.email}})
         console.log("A user signed in")                                                     
     } catch (error) {
