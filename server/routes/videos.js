@@ -4,9 +4,9 @@ import { verifyUserToken } from '../middleware/auth.middleware.js';
 
 const videoRoutes = express.Router()
 
-videoRoutes.get('/all', verifyUserToken, getAllVideos)
-videoRoutes.get('/:id', verifyUserToken, getVideoById)
 videoRoutes.get('/myvideos', verifyUserToken, getMyVideos)
+videoRoutes.get('/all', getAllVideos)
+videoRoutes.get('/:id', getVideoById)
 
 videoRoutes.post('/create', verifyUserToken, createNewVideo)
 

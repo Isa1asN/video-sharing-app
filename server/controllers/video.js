@@ -26,7 +26,7 @@ export const getAllVideos = async (req, res) => {
 
 export const getMyVideos = async (req, res) => {
     try {
-        console.log('req received')
+        // console.log('req received')
         const userId = req.user._id
         let myvids = await Video.find({userId : userId})
         res.status(200).json(myvids)

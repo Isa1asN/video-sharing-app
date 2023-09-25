@@ -23,5 +23,5 @@ mongoose
  
 app.use('/api/users', userRoutes)
 app.use('/api/comments', commentRoutes)
-app.use('/api/videos', videoRoutes)
+app.use('/api/v', videoRoutes)
 app.use('/auth', authRoutes)
