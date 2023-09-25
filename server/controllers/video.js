@@ -56,5 +56,17 @@ export const createNewVideo = async (req, res) => {
     }
 }
 
+export const likeVideoById = async(req, res) => {
+    try {
+        const vidId = req.params.id
+        const video = await Video.findById(vidId)
+        video.likes += 1
+        await video.save()
+        res.status(200).json(video)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
 
 
