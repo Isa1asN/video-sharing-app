@@ -22,3 +22,13 @@ export const getUserById = async (req, res) => {
         res.status(500).send("An error occured")
     }
 }
+
+export const getMyProfile = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const user = await User.findById(userId).select('-password')
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+    }
+}
