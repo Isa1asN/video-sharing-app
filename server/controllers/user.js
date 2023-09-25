@@ -3,10 +3,8 @@ import User from "../models/User.js"
 export const uploadProfileImg = async(req, res) =>{
     try {
         const userId = req.user._id
-        let profile = User.findById(userId)
-        profile.img = req.body.imgUrl
-        await profile.save()
-        res.status(200).send("Profile image added successfully")
+        let profile = User.findByIdAndUpdate(userId, {imgUrl : req.body.imgUrl})
+        res.status(200).json(profile)
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
