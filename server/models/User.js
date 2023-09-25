@@ -24,6 +24,15 @@ const Userschema = new mongoose.Schema(
     following : {
         type : [String]
     },
+    likedVideos : {
+        type : [String],
+    },
+    watchList : {
+        type : [String],
+    },
+    history : {
+        type : [String]
+    }
     },
     {timestamps : true}
 )
