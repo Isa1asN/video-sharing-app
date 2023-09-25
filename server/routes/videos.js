@@ -1,8 +1,11 @@
 import express from 'express'
-import { test } from '../controllers/video.js';
+import { getAllVideos, getMyVideos, test } from '../controllers/video.js';
 
 const videoRoutes = express.Router()
 
 videoRoutes.get("/test", test)
+
+videoRoutes.get('/videos', getAllVideos)
+videoRoutes.get('/myvideos', getMyVideos)
 
 export default videoRoutes;

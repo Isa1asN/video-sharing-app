@@ -17,3 +17,14 @@ export const getAllVideos = async (req, res) => {
             res.status(500).send("an error occured")
         }
 }
+
+export const getMyVideos = async (req, res) => {
+    try {
+        const userId = req.user.id
+        let myvids = await Video.find({userId : userId})
+        res.status(200).json(myvids)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
