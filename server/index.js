@@ -21,7 +21,7 @@ mongoose
     console.log(`Connected! server running on port ${port}`))})
     .catch((err) => console.log(`${err} Did not connect`))    
  
-app.use('/api/users', userRoutes)
+app.use('/api/u', userRoutes)
 app.use('/api/comments', commentRoutes)
 app.use('/api/v', videoRoutes)
 app.use('/auth', authRoutes)

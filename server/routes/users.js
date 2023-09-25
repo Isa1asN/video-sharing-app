@@ -1,8 +1,7 @@
 import express from 'express'
-import { test } from '../controllers/user.js';
+import { uploadProfileImg } from '../controllers/user.js';
 
 const userRoutes = express.Router()
 
-userRoutes.get("/test", test)
-
+userRoutes.post('/profile/uploadImg', uploadProfileImg)
 export default userRoutes;
