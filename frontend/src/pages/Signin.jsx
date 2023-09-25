@@ -105,7 +105,7 @@ function Signin() {
                 password : signUpPassword
             })
             if (response.status == 201){
-                console.log('Signup success')
+                console.log('user Signup success')
                 setTimeout(() => {
                 }, 3000);
                 navigate("/");
