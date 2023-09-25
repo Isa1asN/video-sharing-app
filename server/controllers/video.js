@@ -35,3 +35,22 @@ export const getMyVideos = async (req, res) => {
     }
 }
 
+export const createNewVideo = async (req, res) => {
+    try {
+        const userId = req.user.id
+        let newVid = new Video({
+            userId : userId,
+            title : req.body.title,
+            description : req.body.description,
+            thumbnail : req.body.thumbnail,
+            videoUrl : req.body.videoUrl,
+            tags : req.body.tags
+        })
+        await newVid.save()
+        res.status(201).send("video creation success")
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
+

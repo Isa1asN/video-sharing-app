@@ -23,7 +23,7 @@ const Videoschema = new mongoose.Schema(
         required: true,
     },
     views : {
-        type : String,
+        type : Number,
         default : 0,
     },
     tags : {
@@ -31,8 +31,8 @@ const Videoschema = new mongoose.Schema(
         default : []    
     },
     likes : {
-        type : [String],
-        default : []    
+        type : Number,
+        default : 0   
     },
     },
     {timestamps : true}
