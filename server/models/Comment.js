@@ -18,5 +18,5 @@ const Commentschema = new mongoose.Schema(
     },
     {timestamps : true}
 )
-const Video = mongoose.model('Users', Commentschema)
+const Video = mongoose.model('Comments', Commentschema)
 export default Video;
