@@ -13,9 +13,11 @@ export const uploadProfileImg = async(req, res) =>{
     }
 }
 
-export const getVideoById = async (req, res) => {
+export const getUserById = async (req, res) => {
     try {
-        // todo implement the GET
+        const userId = req.params.id 
+        const user = await User.findById(userId).select('-password -following')
+        res.status(200).json(user)
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
