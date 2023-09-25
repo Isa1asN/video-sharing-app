@@ -29,7 +29,7 @@ export const signIn = async (req, res) => {
         if (!isMatch) return res.status(400).json({error : "Incorrect credentials"});
     
         const payload = {_id : user._id, email: user.email}
-        const token = jwt.sign(payload, process.env.jwtSecret, {expiresIn : "1h"});
+        const token = jwt.sign(payload, process.env.jwtSecret, {expiresIn : "3h"});
         res.cookie("token", token, {httpOnly : true, secure : true});
         res["token"] = token;
         res.status(200).json({token : token, user : {_id : user._id,

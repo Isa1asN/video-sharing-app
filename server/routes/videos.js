@@ -1,12 +1,13 @@
 import express from 'express'
-import { createNewVideo, getAllVideos, getMyVideos, getVideoById, test } from '../controllers/video.js';
+import { createNewVideo, getAllVideos, getMyVideos, getVideoById } from '../controllers/video.js';
+import { verifyUserToken } from '../middleware/auth.middleware.js';
 
 const videoRoutes = express.Router()
 
-videoRoutes.get('/', getAllVideos)
-videoRoutes.get('/:id', getVideoById)
-videoRoutes.get('/myvideos', getMyVideos)
+videoRoutes.get('/all', verifyUserToken, getAllVideos)
+videoRoutes.get('/:id', verifyUserToken, getVideoById)
+videoRoutes.get('/myvideos', verifyUserToken, getMyVideos)
 
-videoRoutes.post('/create', createNewVideo)
+videoRoutes.post('/create', verifyUserToken, createNewVideo)
 
 export default videoRoutes;

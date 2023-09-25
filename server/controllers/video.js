@@ -15,18 +15,19 @@ export const getVideoById = async (req, res) => {
 export const getAllVideos = async (req, res) => {
         try {
             let vids = await Video.find({})
-            req.status(200).json(vids)
+            res.status(200).json(vids)
             console.log("GET request to get all videos")
 
         } catch (error) {
             console.log(error)
             res.status(500).send("an error occured")
         }
-}
+} 
 
 export const getMyVideos = async (req, res) => {
     try {
-        const userId = req.user.id
+        console.log('req received')
+        const userId = req.user._id
         let myvids = await Video.find({userId : userId})
         res.status(200).json(myvids)
     } catch (error) {
@@ -37,7 +38,8 @@ export const getMyVideos = async (req, res) => {
 
 export const createNewVideo = async (req, res) => {
     try {
-        const userId = req.user.id
+        const userId = req.user._id
+        // console.log(userId)
         let newVid = new Video({
             userId : userId,
             title : req.body.title,
