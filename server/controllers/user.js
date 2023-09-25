@@ -13,3 +13,11 @@ export const uploadProfileImg = async(req, res) =>{
     }
 }
 
+export const getVideoById = async (req, res) => {
+    try {
+        // todo implement the GET
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
