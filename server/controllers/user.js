@@ -32,3 +32,19 @@ export const getMyProfile = async (req, res) => {
         console.log(error)
     }
 }
+
+export const followUserById = async (req, res) => {
+    try {
+        const followerId = req.user._id
+        const followedId = req.params.id
+        const followedUser = await User.findById(followedId)
+        const followerUser = await User.findById(followerId)
+        followedUser.followers += 1
+        followerUser.following.append(followerId)
+        await followedUser.save()
+        await followerUser.save()
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
