@@ -49,3 +49,11 @@ export const followUserById = async (req, res) => {
         res.status(500).send("An error occured")
     }
 }
+
+export const getFollowingUsers = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
