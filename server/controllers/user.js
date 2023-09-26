@@ -40,9 +40,10 @@ export const followUserById = async (req, res) => {
         const followedUser = await User.findById(followedId)
         const followerUser = await User.findById(followerId)
         followedUser.followers += 1
-        followerUser.following.append(followerId)
+        followerUser.following.push(followerId)
         await followedUser.save()
         await followerUser.save()
+        res.status(200).json(followedUser)
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
