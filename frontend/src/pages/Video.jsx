@@ -110,7 +110,7 @@ function Video() {
           <Buttons>
             <Button><FavoriteIcon /> <small>12</small></Button>
             <Button><ShareIcon /></Button>
-            <Button><DownloadIcon /> <small>163</small></Button>
+            <Button><DownloadIcon /> <small></small></Button>
           </Buttons>
         </Details>
         <hr />

@@ -37,12 +37,16 @@ export const followUserById = async (req, res) => {
     try {
         const followerId = req.user._id
         const followedId = req.params.id
-        const followedUser = await User.findById(followedId)
-        const followerUser = await User.findById(followerId)
-        followedUser.followers += 1
-        followerUser.following.push(followedId)
-        await followedUser.save()
-        await followerUser.save()
+        const followedUser = await User.findOneAndUpdate(
+            { _id: followedId },
+            { $inc: { followers: 1 } }, 
+            { new: true } 
+        );
+        const followerUser = await User.findOneAndUpdate(
+            { _id: followerId },
+            { $push: { following: followedId } }, 
+            { new: true } 
+        );
         res.status(200).json(followedUser)
     } catch (error) {
         console.log(error)

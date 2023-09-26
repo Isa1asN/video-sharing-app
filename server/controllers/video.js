@@ -1,5 +1,6 @@
 import User from '../models/User.js'
 import Video from '../models/Video.js'
+import mongoose from 'mongoose'
 
 export const getVideoById = async (req, res) => {
     try {
@@ -59,11 +60,8 @@ export const createNewVideo = async (req, res) => {
 export const likeVideoById = async(req, res) => {
     try {
         const vidId = req.params.id
-        const video = await Video.findById(vidId)
-        const user = await User.findById(req.user._id)
-        video.likes += 1
-        user.likedVideos.push(vidId)
-        await video.save()
+        const video = await Video.findOneAndUpdate({_id : vidId}, {$inc : {likes : 1}}, {new : true})
+        const user = await User.findOneAndUpdate({_id : req.user._id}, {$push : {likedVideos : vidId}})
         res.status(200).json(video)
     } catch (error) {
         console.log(error)
@@ -74,10 +72,74 @@ export const likeVideoById = async(req, res) => {
 export const getLikedVideos = async (req, res) => {
     try {
         const userId = req.user._id
+        const user = await User.findById(userId)
+        const liked_list = user.likedVideos
+        const likedVids = await Promise.all(liked_list.map(async (vidId) => {
+            const vid = await Video.findById(vidId)
+            return vid
+        }))
+        res.status(200).json(likedVids)
 
     } catch (error) {
         console.log(error)
+        res.status(500).send("An error occured")
     }
 }
 
+export const getWatchlist = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        const watch = user.watchList
+        const watchedVids = await Promise.all(watch.map(async (vidId) => {
+            const vid = await Video.findById(vidId)
+            return vid
+        }))
+        res.status(200).json(watchedVids)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
+
+export const getHistory = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id)
+        const hist = user.history
+        const history = await Promise.all(hist.map(async (vidId) => {
+            const vid = Video.findById(vidId)
+            return vid
+        }))
+        res.status(200).json(history)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
+
+export const addToWatchlist = async (req, res) => {
+    try {
+        const vidId = req.params.id
+        const user = await User.findById(req.user._id)
+        user.watchList.push(vidId)
+        await user.save()
+        res.status(200).json()
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
+
+export const addTohistory = async (req, res) => {
+    try {
+        const vidId = req.params.id
+        const user = await User.findById(req.user._id)
+        user.history.push(vidId)
+        await user.save()
+        res.status(200).json()
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("An error occured")
+    }
+}
 
