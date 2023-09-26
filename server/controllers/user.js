@@ -40,7 +40,7 @@ export const followUserById = async (req, res) => {
         const followedUser = await User.findById(followedId)
         const followerUser = await User.findById(followerId)
         followedUser.followers += 1
-        followerUser.following.push(followerId)
+        followerUser.following.push(followedId)
         await followedUser.save()
         await followerUser.save()
         res.status(200).json(followedUser)
@@ -52,7 +52,16 @@ export const followUserById = async (req, res) => {
 
 export const getFollowingUsers = async (req, res) => {
     try {
-        
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        const follow_list = user.following 
+        const following_users = await Promise.all(follow_list.map(async (userId) => {
+            const user = await User.findById(userId).select('name email followers img')
+            return user
+        }))
+        res.status(200).json(following_users)
+
+
     } catch (error) {
         console.log(error)
     }
