@@ -60,12 +60,23 @@ export const likeVideoById = async(req, res) => {
     try {
         const vidId = req.params.id
         const video = await Video.findById(vidId)
+        const user = await User.findById(req.user._id)
         video.likes += 1
+        user.likedVideos.push(vidId)
         await video.save()
         res.status(200).json(video)
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
+    }
+}
+
+export const getLikedVideos = async (req, res) => {
+    try {
+        const userId = req.user._id
+
+    } catch (error) {
+        console.log(error)
     }
 }
 
