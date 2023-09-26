@@ -123,7 +123,7 @@ export const addToWatchlist = async (req, res) => {
         const user = await User.findById(req.user._id)
         user.watchList.push(vidId)
         await user.save()
-        res.status(200).json()
+        res.status(200).send("Added to watch list")
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
@@ -136,7 +136,7 @@ export const addTohistory = async (req, res) => {
         const user = await User.findById(req.user._id)
         user.history.push(vidId)
         await user.save()
-        res.status(200).json()
+        res.status(200).send("Added to history")
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
