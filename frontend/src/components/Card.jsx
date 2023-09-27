@@ -50,7 +50,7 @@ const Info = styled.div`
 
 `
 
-function Card({type}) {
+function Card({type, title}) {
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
     <Container type={type} >
@@ -58,7 +58,7 @@ function Card({type}) {
       <Details type={type}>
           <ChannelImage type={type}/>
           <Texts>
-            <Title>Test </Title>
+            <Title>{title} </Title>
             <ChannelName > Esu presents</ChannelName>
             <Info>1020 views | 2 days ago</Info>
           </Texts>
