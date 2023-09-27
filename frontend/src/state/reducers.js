@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import userReducer from './userSlice'
+import vidReducer from './vidSlice'
 
 const rootReducer = combineReducers({
-    user : userReducer,
+    video : vidReducer,
 })
 
 

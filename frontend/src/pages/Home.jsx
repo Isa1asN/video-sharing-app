@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Card from "../components/Card"
 import { useEffect, useState } from "react"
 import axios from 'axios'
+import {useSelector, useDispatch} from 'react-redux'
+import { setVideos } from "../state/vidSlice"
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -16,15 +18,16 @@ const Container = styled.div`
 `
 
 function Home() {
-  let [vids, setVids] = useState([])
+  const dispatch = useDispatch()
+  const videos = useSelector((state) => state.video.videos)
 
   useEffect( () => {
     const fetchvids = async () => {
     try {
       let response = await client.get('/v/all')
       // console.log(response)
-      if (response.status == 200) {
-        setVids(response.data)
+      if (response.status === 200) {
+        dispatch(setVideos(response.data))
         console.log("Videos fetched")
       }
       else {
@@ -35,10 +38,10 @@ function Home() {
     }
   }
   fetchvids()
-  }, [])
+  }, [dispatch])
   return (
     <Container>
-      {vids.map((vid) => {
+      {videos.map((vid) => {
        return <Card key={vid._id} title={vid.title} />
       })}
     </Container>
