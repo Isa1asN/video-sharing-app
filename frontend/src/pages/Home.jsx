@@ -22,7 +22,7 @@ function Home() {
     const fetchvids = async () => {
     try {
       let response = await client.get('/v/all')
-      console.log(response)
+      // console.log(response)
       if (response.status == 200) {
         setVids(response.data)
         console.log("Videos fetched")
