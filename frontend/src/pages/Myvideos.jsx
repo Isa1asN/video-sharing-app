@@ -5,7 +5,9 @@ import Card from "../components/Card"
 import axios from 'axios'
 import { setMyVideos } from '../state/vidSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CreateVideo from '../components/CreateVideo'
 
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -34,6 +36,7 @@ const Wrapper = styled.div`
 
 
 function Myvideos() {
+    const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
@@ -49,7 +52,6 @@ function Myvideos() {
                 else {
                     console.log(response.status)
                 }
-                
             } catch (error) {
                 console.log(error)
             }
@@ -60,9 +62,12 @@ function Myvideos() {
   return (<>
     <Wrapper>
             Upload new video
-            <CloudUploadIcon style={{fontSize:'40px', color: '#3ac6a6', cursor:'pointer'}} />
+            <CloudUploadIcon onClick={()=> setIsOpen(true)} style={{fontSize:'40px', color: '#3ac6a6', cursor:'pointer'}} />
     </Wrapper>
     <hr />
+
+    <CreateVideo isOpen={isOpen} />
+
     <Container>
         {myVids.map((vid) => {
             return <Card key={vid._id} title={vid.title}/>
