@@ -46,14 +46,14 @@ const Form = styled.form`
   
 `
 const Input = styled.input`
+    border: none;
+    border-radius: 5px;
     &:focus{
         outline-color:#3ac6a6
     }
     padding: 10px 10px;
     
 `
-
-
 // eslint-disable-next-line react/prop-types
 function CreateVideo({isOpen}) {
     if (!isOpen) return null
@@ -64,11 +64,11 @@ function CreateVideo({isOpen}) {
         <Form>
             <Input placeholder='Enter title' required />
             <Input placeholder='Enter description' required/>
-            <Input />
-            <Input />
-            <Button>Upload</Button>
+            <Input placeholder='Video Thumbnail Image' type='file' />
+            <Input placeholder='Enter tags' />
+            <Button type='submit'>Upload</Button>
         </Form>
-        <CancelIcon  style={{cursor:'pointer', color:'light-red', fontSize:'30px', alignSelf:'center'}} />
+        <CancelIcon  style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
       </Popup>
     </Container>
   )

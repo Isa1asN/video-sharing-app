@@ -12,7 +12,7 @@ import CreateVideo from '../components/CreateVideo'
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5MjUxNDEsImV4cCI6MTY5NTkzNTk0MX0.3mO5j5ro6ajCQYBwWayJQkPJJXusGp-W2Gx3IwTt_Gk'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5MzkyODIsImV4cCI6MTY5NTk1MDA4Mn0.J5s6ub6aY-k-Eqn6RvAFL01ZLbxPzi_4knb3FVz1UFc'
 
 const config = {
     headers : {Authorization : `Bearer ${token}`}
