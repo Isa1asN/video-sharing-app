@@ -5,6 +5,7 @@ import Card from "../components/Card"
 import axios from 'axios'
 import { setMyVideos } from '../state/vidSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -20,6 +21,25 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
 `
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    color: ${({theme}) => theme.text};
+    gap: 50px;
+
+`
+const FileInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+`
+const FileInput = styled.input`
+    
+`
+
 
 function Myvideos() {
     const dispatch = useDispatch()
@@ -44,12 +64,21 @@ function Myvideos() {
     fetchmyvids()
 
     }, [dispatch])
-  return (
+  return (<>
+    <Wrapper>
+        <FileInputContainer>
+            <CloudUploadIcon style={{fontSize:'40px'}} />
+            <FileInput type='file' />
+        </FileInputContainer>
+        Upload Video
+    </Wrapper>
+    <hr />
     <Container>
         {myVids.map((vid) => {
             return <Card key={vid._id} title={vid.title}/>
         })}
     </Container>
+    </>
   )
 }
 
