@@ -87,10 +87,12 @@ function Menu({darkmode, setDarkmode}) {
         </Item>
         </Link>
         <hr style={{border:'0.5px solid #373737'}} />
-        <Item>
-            <VideoLibraryIcon />
-            My videos
-        </Item>
+        <Link to='myvideos' style={{textDecoration:'none', color: 'inherit'}}>
+            <Item>
+                <VideoLibraryIcon />
+                My videos
+            </Item>
+        </Link>
         <Item>
             <AccessTimeIcon />
             Watch later

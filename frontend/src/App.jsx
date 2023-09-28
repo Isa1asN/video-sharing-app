@@ -10,6 +10,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
 import Video from './pages/Video';
 import Signin from './pages/Signin';
+import Myvideos from './pages/Myvideos';
 
 
 const Container = styled.div`
@@ -43,6 +44,7 @@ function App() {
               <Route path='video'>
                 <Route path=':id' element={<Video />} />
               </Route>
+              <Route path='myvideos' element={<Myvideos />}/>
             </Route>
           </Routes>
         </Body>
