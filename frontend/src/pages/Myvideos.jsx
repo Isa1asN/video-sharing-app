@@ -23,25 +23,18 @@ const Container = styled.div`
 `
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     color: ${({theme}) => theme.text};
     gap: 50px;
 
 `
-const FileInputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-`
-const FileInput = styled.input`
-    
-`
+
 
 
 function Myvideos() {
+
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
 
@@ -66,11 +59,8 @@ function Myvideos() {
     }, [dispatch])
   return (<>
     <Wrapper>
-        <FileInputContainer>
-            <CloudUploadIcon style={{fontSize:'40px'}} />
-            <FileInput type='file' />
-        </FileInputContainer>
-        Upload Video
+            Upload new video
+            <CloudUploadIcon style={{fontSize:'40px', color: '#3ac6a6', cursor:'pointer'}} />
     </Wrapper>
     <hr />
     <Container>
