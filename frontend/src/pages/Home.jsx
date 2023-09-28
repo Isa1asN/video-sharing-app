@@ -7,7 +7,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { setVideos } from "../state/vidSlice"
 import mania from '../assets/mania.jfif'
 
-const client = axios.create({baseURL : 'http://localhost:3004/api'})
+ const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
 
 const Container = styled.div`

@@ -1,20 +1,54 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Card from "../components/Card"
+import axios from 'axios'
+import { setMyVideos } from '../state/vidSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
+
+const client = axios.create({baseURL : 'http://localhost:3004/api'})
+
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5MjUxNDEsImV4cCI6MTY5NTkzNTk0MX0.3mO5j5ro6ajCQYBwWayJQkPJJXusGp-W2Gx3IwTt_Gk'
+
+const config = {
+    headers : {Authorization : `Bearer ${token}`}
+}
 
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    
 `
 
 function Myvideos() {
+    const dispatch = useDispatch()
+    const myVids = useSelector((state) => state.video.myVideos)
+
+    useEffect(() => {
+        const fetchmyvids = async () => {
+            try {
+                const response = await client.get('/v/myvideos', config)
+                if (response.status === 200) {
+                    dispatch(setMyVideos(response.data))
+                    console.log("Myvideos fetched")
+                }
+                else {
+                    console.log(response.status)
+                }
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    fetchmyvids()
+
+    }, [dispatch])
   return (
     <Container>
-        Myvideos
+        {myVids.map((vid) => {
+            return <Card key={vid._id} title={vid.title}/>
+        })}
     </Container>
   )
 }
