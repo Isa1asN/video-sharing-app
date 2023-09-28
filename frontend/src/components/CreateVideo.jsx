@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import styled from 'styled-components'
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const Container = styled.div`
   position: fixed;
@@ -25,7 +26,7 @@ const Popup = styled.div`
   flex-direction: column;
   width: 30%;
 `;
-const CloseButton = styled.button`
+const Button = styled.button`
   background-color: #b8e3d6;
   border: 1px solid black;
   padding: 10px 20px;
@@ -36,12 +37,13 @@ const CloseButton = styled.button`
     background-color: #3ac6a6;
   }
 `;
+
 const Form = styled.form`
     margin: 15px 10px;
     display: flex;
   flex-direction: column;
   gap: 20px;
-
+  
 `
 const Input = styled.input`
     &:focus{
@@ -60,12 +62,13 @@ function CreateVideo({isOpen}) {
       <Popup>
         <div>Upload a new video </div>
         <Form>
-            <Input placeholder='Enter title' />
-            <Input placeholder='Enter description' />
+            <Input placeholder='Enter title' required />
+            <Input placeholder='Enter description' required/>
             <Input />
             <Input />
+            <Button>Upload</Button>
         </Form>
-        <CloseButton >Cancel</CloseButton>
+        <CancelIcon  style={{cursor:'pointer', color:'light-red', fontSize:'30px', alignSelf:'center'}} />
       </Popup>
     </Container>
   )
