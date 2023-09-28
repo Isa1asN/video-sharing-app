@@ -64,8 +64,9 @@ function CreateVideo({isOpen}) {
         <Form>
             <Input placeholder='Enter title' required />
             <Input placeholder='Enter description' required/>
+            <label style={{alignSelf:'start'}}> Video Thumbnail Image</label>
             <Input placeholder='Video Thumbnail Image' type='file' />
-            <Input placeholder='Enter tags' />
+            <Input placeholder='Enter tags (separated by a space)' />
             <Button type='submit'>Upload</Button>
         </Form>
         <CancelIcon  style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
