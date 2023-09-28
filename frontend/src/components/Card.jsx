@@ -13,6 +13,7 @@ const Image = styled.img`
     height:${(props) => props.type === 'sm' ? '100px' : '200px'};
     background: #999;
     flex: 1;
+    border-radius: 15px;
 `
 const Details = styled.div`
     display: flex;
@@ -50,11 +51,11 @@ const Info = styled.div`
 
 `
 
-function Card({type, title}) {
+function Card({type, title, imgUrl}) {
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
     <Container type={type} >
-      <Image type={type} />
+      <Image src={imgUrl} type={type} /  >
       <Details type={type}>
           <ChannelImage type={type}/>
           <Texts>

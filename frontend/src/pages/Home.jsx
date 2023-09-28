@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { setVideos } from "../state/vidSlice"
+import mania from '../assets/mania.jfif'
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -41,7 +42,7 @@ function Home() {
   return (
     <Container>
       {videos.map((vid) => {
-       return <Card key={vid._id} title={vid.title} />
+       return <Card key={vid._id} title={vid.title} imgUrl={mania}/>
       })}
     </Container>
   )
