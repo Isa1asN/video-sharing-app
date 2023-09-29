@@ -5,6 +5,7 @@ const vidSlice = createSlice({
     initialState : {
         videos : [],
         myVideos : [],
+        selectedVideo : null,
     },
     reducers : {
         setVideos : (state, action) => {
@@ -12,10 +13,13 @@ const vidSlice = createSlice({
         },
         setMyVideos : (state, action) => {
             state.myVideos = action.payload
+        },
+        setSelectedVideo : (state, action) => {
+            state.selectedVideo = action.payload
         }
     },
 
 })
 
-export const {setVideos, setMyVideos} = vidSlice.actions
+export const {setVideos, setMyVideos, setSelectedVideo} = vidSlice.actions
 export default vidSlice.reducer;

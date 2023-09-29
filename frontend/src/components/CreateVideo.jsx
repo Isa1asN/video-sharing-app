@@ -2,6 +2,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import CancelIcon from '@mui/icons-material/Cancel';
+import storage from '../firebaseConfig';
+
+const storageRef = storage.ref();
 
 const Container = styled.div`
   position: fixed;
@@ -55,21 +58,23 @@ const Input = styled.input`
     
 `
 // eslint-disable-next-line react/prop-types
-function CreateVideo({isOpen}) {
+function CreateVideo({isOpen, setIsOpen}) {
     if (!isOpen) return null
   return (
     <Container>
       <Popup>
         <div>Upload a new video </div>
         <Form>
+            <label style={{alignSelf:'start'}}> Select Video</label>
+            <Input type='file' />
             <Input placeholder='Enter title' required />
             <Input placeholder='Enter description' required/>
             <label style={{alignSelf:'start'}}> Video Thumbnail Image</label>
-            <Input placeholder='Video Thumbnail Image' type='file' />
+            <Input type='file' />
             <Input placeholder='Enter tags (separated by a space)' />
             <Button type='submit'>Upload</Button>
         </Form>
-        <CancelIcon  style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
+        <CancelIcon onClick={() => setIsOpen(false)} style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
       </Popup>
     </Container>
   )
