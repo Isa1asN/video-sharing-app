@@ -3,8 +3,10 @@ import React from 'react'
 import styled from 'styled-components'
 import CancelIcon from '@mui/icons-material/Cancel';
 import storage from '../firebaseConfig';
+import { useState } from 'react';
 
 const storageRef = storage.ref();
+
 
 const Container = styled.div`
   position: fixed;
@@ -57,6 +59,20 @@ const Input = styled.input`
     padding: 10px 10px;
     
 `
+const handleSubmit = (e) =>{
+    e.preventDefault()
+    const videoFile = document.getElementById('video-input').files[0];                          
+    const title = document.getElementById('title-input').value
+    const description = document.getElementById('desc-input').value
+    const imgFile = document.getElementById('thumb-input').files[0];
+    const tag = document.getElementById('tag-input').value
+    console.log(description)
+
+    const videoRef = storageRef.child('videos/' + videoFile.name);
+    
+
+}
+
 // eslint-disable-next-line react/prop-types
 function CreateVideo({isOpen, setIsOpen}) {
     if (!isOpen) return null
@@ -64,14 +80,14 @@ function CreateVideo({isOpen, setIsOpen}) {
     <Container>
       <Popup>
         <div>Upload a new video </div>
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <label style={{alignSelf:'start'}}> Select Video</label>
-            <Input type='file' />
-            <Input placeholder='Enter title' required />
-            <Input placeholder='Enter description' required/>
+            <Input id="video-input" required type='file' />
+            <Input id="title-input" placeholder='Enter title' required />
+            <Input id="desc-input" placeholder='Enter description' required/>
             <label style={{alignSelf:'start'}}> Video Thumbnail Image</label>
-            <Input type='file' />
-            <Input placeholder='Enter tags (separated by a space)' />
+            <Input required id="thumb-input" type='file' />
+            <Input id="tag-input" required placeholder='Enter tags (separated by a space)' />
             <Button type='submit'>Upload</Button>
         </Form>
         <CancelIcon onClick={() => setIsOpen(false)} style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
