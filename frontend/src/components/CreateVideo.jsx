@@ -88,46 +88,53 @@ const createNewVideo = async (title, description, thumbnail, videoUrl, tags) => 
     }
 } 
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    const videoFile = document.getElementById('video-input').files[0];                          
-    const title = document.getElementById('title-input').value
-    const description = document.getElementById('desc-input').value
-    const imgFile = document.getElementById('thumb-input').files[0];
-    let tags = document.getElementById('tag-input').value
-    tags = tags.split(' ')
-    tags = tags.map(tag => '#' + tag);
 
-    let vidUrl = ''
-    let imgUrl = ''
-
-    const videoRef = storageRef.child('videos/' + videoFile.name);
-    videoRef.put(videoFile).then((snapshot) => {
-        console.log('Video uploaded successfully');
-        videoRef.getDownloadURL().then((url) => {
-          console.log('Video URL:', url);
-          vidUrl = url
-        });
-      });
-    const imgRef = storageRef.child('images/' + imgFile.name);
-    imgRef.put(imgFile).then((snapshot) => {
-        console.log('Image uploaded successfully');
-        imgRef.getDownloadURL().then((url) => {
-          console.log('Image URL:', url);
-          imgUrl = url
-        });
-      });
-
-
-    createNewVideo(title, description, imgUrl, vidUrl, tags);
-
-}
 
 // eslint-disable-next-line react/prop-types
-function CreateVideo({isOpen, setIsOpen}) {
+function CreateVideo({isOpen, setIsOpen, setLoading}) {
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setLoading(true)
+    
+        const videoFile = document.getElementById('video-input').files[0];                          
+        const title = document.getElementById('title-input').value
+        const description = document.getElementById('desc-input').value
+        const imgFile = document.getElementById('thumb-input').files[0];
+        let tags = document.getElementById('tag-input').value
+        tags = tags.split(' ')
+        tags = tags.map(tag => '#' + tag);
+    
+        let vidUrl = ''
+        let imgUrl = ''
+    
+        const videoRef = storageRef.child('videos/' + videoFile.name);
+        videoRef.put(videoFile).then((snapshot) => {
+            console.log('Video uploaded successfully');
+            videoRef.getDownloadURL().then((url) => {
+              console.log('Video URL:', url);
+              vidUrl = url
+            });
+          });
+        const imgRef = storageRef.child('images/' + imgFile.name);
+        imgRef.put(imgFile).then((snapshot) => {
+            console.log('Image uploaded successfully');
+            imgRef.getDownloadURL().then((url) => {
+              console.log('Image URL:', url);
+              imgUrl = url
+            });
+          });
+    
+    
+        createNewVideo(title, description, imgUrl, vidUrl, tags);
+        setLoading(false)
+    
+    }
+
     if (!isOpen) return null
   return (
     <Container>
+    
       <Popup>
         <div>Upload a new video </div>
         <Form onSubmit={handleSubmit}>
@@ -142,6 +149,7 @@ function CreateVideo({isOpen, setIsOpen}) {
         </Form>
         <CancelIcon onClick={() => setIsOpen(false)} style={{cursor:'pointer', color:'red', fontSize:'30px', alignSelf:'center'}} />
       </Popup>
+    
     </Container>
   )
 }

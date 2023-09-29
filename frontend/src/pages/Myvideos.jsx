@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CreateVideo from '../components/CreateVideo'
+import {TailSpin} from 'react-loader-spinner'
+
 
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -37,6 +39,8 @@ const Wrapper = styled.div`
 
 function Myvideos() {
     const [isOpen, setIsOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
 
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
@@ -66,10 +70,12 @@ function Myvideos() {
     </Wrapper>
     <hr />
 
-    <CreateVideo isOpen={isOpen} setIsOpen={setIsOpen} />
+    <CreateVideo isOpen={isOpen} setIsOpen={setIsOpen} setLoading={setLoading}/>
 
     <Container>
-        {myVids.map((vid) => {
+        { loading ? <TailSpin color="#3ac6a6" height={100} width={100}/> 
+        :
+        myVids.map((vid) => {
             return <Card key={vid._id} title={vid.title}/>
         })}
     </Container>
