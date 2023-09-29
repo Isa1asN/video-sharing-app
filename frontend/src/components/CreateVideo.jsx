@@ -5,6 +5,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import storage from '../firebaseConfig';
 import { useState } from 'react';
 import axios from 'axios';
+import { addNewVideo } from '../state/vidSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const storageRef = storage.ref();
 
@@ -67,8 +69,7 @@ const Input = styled.input`
     padding: 10px 10px;
     
 `
-
-const createNewVideo = async (title, description, thumbnail, videoUrl, tags) => {
+const createNewVideo = async (title, description, thumbnail, videoUrl, tags, dispatch) => {
     try {
         const response =  await client.post('/v/create', {
             title : title,
@@ -79,6 +80,8 @@ const createNewVideo = async (title, description, thumbnail, videoUrl, tags) => 
         }, config)
         if (response.status) {
             alert("Video uploaded successfully!")
+            dispatch(addNewVideo(response.data))
+
         } else {
             alert("An error occured")
             console.log(response.status)
@@ -91,11 +94,14 @@ const createNewVideo = async (title, description, thumbnail, videoUrl, tags) => 
 
 
 // eslint-disable-next-line react/prop-types
-function CreateVideo({isOpen, setIsOpen, setLoading}) {
+ function CreateVideo({isOpen, setIsOpen, setLoading}) {
+    const dispatch = useDispatch()
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
+        setIsOpen(false)
     
         const videoFile = document.getElementById('video-input').files[0];                          
         const title = document.getElementById('title-input').value
@@ -108,25 +114,16 @@ function CreateVideo({isOpen, setIsOpen, setLoading}) {
         let vidUrl = ''
         let imgUrl = ''
     
-        const videoRef = storageRef.child('videos/' + videoFile.name);
-        videoRef.put(videoFile).then((snapshot) => {
-            console.log('Video uploaded successfully');
-            videoRef.getDownloadURL().then((url) => {
-              console.log('Video URL:', url);
-              vidUrl = url
-            });
-          });
-        const imgRef = storageRef.child('images/' + imgFile.name);
-        imgRef.put(imgFile).then((snapshot) => {
-            console.log('Image uploaded successfully');
-            imgRef.getDownloadURL().then((url) => {
-              console.log('Image URL:', url);
-              imgUrl = url
-            });
-          });
+        const [videoSnapshot, imgSnapshot] = await Promise.all([
+            storageRef.child('videos/' + videoFile.name).put(videoFile),
+            storageRef.child('images/' + imgFile.name).put(imgFile)
+        ]);
+
+        vidUrl = await videoSnapshot.ref.getDownloadURL();
+        imgUrl = await imgSnapshot.ref.getDownloadURL();
     
     
-        createNewVideo(title, description, imgUrl, vidUrl, tags);
+        createNewVideo(title, description, imgUrl, vidUrl, tags, dispatch);
         setLoading(false)
     
     }

@@ -50,7 +50,7 @@ export const createNewVideo = async (req, res) => {
             tags : req.body.tags
         })
         await newVid.save()
-        res.status(201).send("video creation success")
+        res.status(201).json(newVid)
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")

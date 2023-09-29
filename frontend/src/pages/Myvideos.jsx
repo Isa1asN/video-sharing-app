@@ -63,6 +63,8 @@ function Myvideos() {
     fetchmyvids()
 
     }, [dispatch])
+    const reversedVids = [...myVids].reverse();
+
   return (<>
     <Wrapper>
             Upload new video
@@ -73,9 +75,9 @@ function Myvideos() {
     <CreateVideo isOpen={isOpen} setIsOpen={setIsOpen} setLoading={setLoading}/>
 
     <Container>
-        { loading ? <TailSpin color="#3ac6a6" height={100} width={100}/> 
+        { loading ? <center><TailSpin color="#3ac6a6" height={100} width={100}/></center>
         :
-        myVids.map((vid) => {
+        reversedVids.map((vid) => {
             return <Card key={vid._id} title={vid.title}/>
         })}
     </Container>
