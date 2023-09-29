@@ -4,9 +4,17 @@ import styled from 'styled-components'
 import CancelIcon from '@mui/icons-material/Cancel';
 import storage from '../firebaseConfig';
 import { useState } from 'react';
+import axios from 'axios';
 
 const storageRef = storage.ref();
 
+const client = axios.create({baseURL : 'http://localhost:3004/api'})
+
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5NTYxODEsImV4cCI6MTY5NTk2Njk4MX0.hMTqsqcvtm5g7VdEeiDJTsRRioQcc184Ki6MRPSoEA4'
+
+const config = {
+    headers : {Authorization : `Bearer ${token}`}
+}
 
 const Container = styled.div`
   position: fixed;
@@ -59,17 +67,59 @@ const Input = styled.input`
     padding: 10px 10px;
     
 `
-const handleSubmit = (e) =>{
+
+const createNewVideo = async (title, description, thumbnail, videoUrl, tags) => {
+    try {
+        const response =  await client.post('/v/create', {
+            title : title,
+            description : description,
+            thumbnail : thumbnail,
+            videoUrl : videoUrl,
+            tags : tags
+        }, config)
+        if (response.status) {
+            alert("Video uploaded successfully!")
+        } else {
+            alert("An error occured")
+            console.log(response.status)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+} 
+
+const handleSubmit = (e) => {
     e.preventDefault()
     const videoFile = document.getElementById('video-input').files[0];                          
     const title = document.getElementById('title-input').value
     const description = document.getElementById('desc-input').value
     const imgFile = document.getElementById('thumb-input').files[0];
-    const tag = document.getElementById('tag-input').value
-    console.log(description)
+    let tags = document.getElementById('tag-input').value
+    tags = tags.split(' ')
+    tags = tags.map(tag => '#' + tag);
+
+    let vidUrl = ''
+    let imgUrl = ''
 
     const videoRef = storageRef.child('videos/' + videoFile.name);
-    
+    videoRef.put(videoFile).then((snapshot) => {
+        console.log('Video uploaded successfully');
+        videoRef.getDownloadURL().then((url) => {
+          console.log('Video URL:', url);
+          vidUrl = url
+        });
+      });
+    const imgRef = storageRef.child('images/' + imgFile.name);
+    imgRef.put(imgFile).then((snapshot) => {
+        console.log('Image uploaded successfully');
+        imgRef.getDownloadURL().then((url) => {
+          console.log('Image URL:', url);
+          imgUrl = url
+        });
+      });
+
+
+    createNewVideo(title, description, imgUrl, vidUrl, tags);
 
 }
 
