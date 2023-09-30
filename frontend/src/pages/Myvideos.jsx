@@ -75,7 +75,7 @@ function Myvideos() {
     <CreateVideo isOpen={isOpen} setIsOpen={setIsOpen} setLoading={setLoading}/>
 
     <Container>
-        { loading ? <center><TailSpin color="#3ac6a6" height={100} width={100}/></center>
+        { loading ? <div style={{alignItems:'center'}}><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
         :
         reversedVids.map((vid) => {
             return <Card key={vid._id} title={vid.title}/>
