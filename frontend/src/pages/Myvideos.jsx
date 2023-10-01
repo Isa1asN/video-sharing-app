@@ -40,14 +40,13 @@ function Myvideos() {
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
 
-    const token = useSelector((state) => state.user.user.token)
     useEffect(() => {
         const fetchmyvids = async () => {
             try {
 
                 const response = await client.get('/v/myvideos', {
                     headers : {
-                        Authorization : `Bearer ${token}`
+                        Authorization : `Bearer ${localStorage.getItem('t')}`
                     }
                 })
                 if (response.status === 200) {
@@ -63,7 +62,7 @@ function Myvideos() {
         }
     fetchmyvids()
 
-    }, [dispatch, token])
+    }, [dispatch])
     const reversedVids = [...myVids].reverse();
 
   return (<>

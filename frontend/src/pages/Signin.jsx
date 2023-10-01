@@ -90,6 +90,7 @@ function Signin() {
             }) 
             if(response.status == 200){
                 dispatch(setUser(response.data))
+                localStorage.setItem('t', response.data.token)
                 console.log("Sign in success")
                 setTimeout(() => {
                 }, 3000);
