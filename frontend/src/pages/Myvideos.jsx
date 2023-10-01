@@ -16,7 +16,7 @@ const client = axios.create({baseURL : 'http://localhost:3004/api'})
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap:28px ;
 `
 const Wrapper = styled.div`
     display: flex;
@@ -73,7 +73,7 @@ function Myvideos() {
         { loading ? <div style={{alignItems:'center'}}><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
         :
         reversedVids.map((vid) => {
-            return <Card key={vid._id} title={vid.title} imgUrl={vid.thumbnail}/>
+            return <Card key={vid._id} title={vid.title} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
         })}
     </Container>
     </>
