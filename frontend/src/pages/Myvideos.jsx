@@ -37,17 +37,19 @@ function Myvideos() {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
-
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
 
-    // const token = useSelector((state) => state.user.user.token)
+    const token = useSelector((state) => state.user.user.token)
     useEffect(() => {
         const fetchmyvids = async () => {
             try {
 
-                const response = await client.get('/v/myvideos')
+                const response = await client.get('/v/myvideos', {
+                    headers : {
+                        Authorization : `Bearer ${token}`
+                    }
+                })
                 if (response.status === 200) {
                     dispatch(setMyVideos(response.data))
                     console.log("Myvideos fetched")
@@ -61,7 +63,7 @@ function Myvideos() {
         }
     fetchmyvids()
 
-    }, [dispatch])
+    }, [dispatch, token])
     const reversedVids = [...myVids].reverse();
 
   return (<>
