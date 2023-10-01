@@ -12,9 +12,11 @@ import {TailSpin} from 'react-loader-spinner'
 
 
 
+
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5NTg0ODYsImV4cCI6MTY5NTk2OTI4Nn0.CbLkjkrnwwGjFLTzP97mtnTnJIsgEDsqIYO_W-5KEsg'
+const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, '$1');
+
 
 const config = {
     headers : {Authorization : `Bearer ${token}`}
