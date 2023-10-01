@@ -29,13 +29,13 @@ export const signIn = async (req, res) => {
         if (!isMatch) return res.status(400).json({error : "Incorrect credentials"});
     
         const payload = {_id : user._id, email: user.email}
-        const token = jwt.sign(payload, process.env.jwtSecret, {expiresIn : "3h"});
+        const token = jwt.sign(payload, process.env.jwtSecret, {expiresIn : "8h"});
         res.cookie("token", token, {httpOnly : true, secure : true});
         res["token"] = token;
         res.status(200).json({token : token, user : {_id : user._id,
                                                      name : user.name,
                                                      email : user.email}})
-        // console.log("A user signed in")                                                     
+        console.log("A user signed in")                                                     
     } catch (error) {
         res.status(500).json({error : "couldn't sign in"});
     }

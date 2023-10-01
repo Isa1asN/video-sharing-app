@@ -15,12 +15,6 @@ import {TailSpin} from 'react-loader-spinner'
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
-const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, '$1');
-
-
-const config = {
-    headers : {Authorization : `Bearer ${token}`}
-}
 
 const Container = styled.div`
     display: flex;
@@ -44,13 +38,18 @@ function Myvideos() {
     const [loading, setLoading] = useState(false);
 
 
+
     const dispatch = useDispatch()
     const myVids = useSelector((state) => state.video.myVideos)
 
+    const token = useSelector((state) => state.user.user.token)
     useEffect(() => {
         const fetchmyvids = async () => {
             try {
-                const response = await client.get('/v/myvideos', config)
+
+                const response = await client.get('/v/myvideos', {
+                    headers : {Authorization : `Bearer ${token}`}
+                })
                 if (response.status === 200) {
                     dispatch(setMyVideos(response.data))
                     console.log("Myvideos fetched")
@@ -64,7 +63,7 @@ function Myvideos() {
         }
     fetchmyvids()
 
-    }, [dispatch])
+    }, [dispatch, token])
     const reversedVids = [...myVids].reverse();
 
   return (<>

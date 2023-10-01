@@ -89,10 +89,10 @@ function Signin() {
                 password : logPassword,
             }) 
             if(response.status == 200){
+                dispatch(setUser(response.data))
                 console.log("Sign in success")
                 setTimeout(() => {
                 }, 3000);
-                dispatch(setUser(response.data))
                 navigate("/");
                 setLoading(false);
             }
