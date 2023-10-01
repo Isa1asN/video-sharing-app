@@ -5,6 +5,9 @@ import axios from 'axios'
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import {TailSpin} from 'react-loader-spinner'
+import { useDispatch } from "react-redux"
+import { setUser } from "../state/userSlice"
+
 
 const client = axios.create({baseURL : 'http://localhost:3004'})
 
@@ -74,6 +77,9 @@ function Signin() {
     const [logPassword, setLogPassword] = useState('')
     const [signUpEmail, setSignUpEmail] = useState('')
     const [signUpPassword, setSignUpPassword] = useState('')
+
+    const dispatch = useDispatch()
+
     const handleLogin = async (event)=> {
         event.preventDefault()
         setLoading(true)
@@ -86,6 +92,7 @@ function Signin() {
                 console.log("Sign in success")
                 setTimeout(() => {
                 }, 3000);
+                dispatch(setUser(response.data))
                 navigate("/");
                 setLoading(false);
             }
