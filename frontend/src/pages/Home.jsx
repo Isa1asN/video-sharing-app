@@ -42,7 +42,7 @@ function Home() {
   return (
     <Container>
       {videos.map((vid) => {
-       return <Card key={vid._id} title={vid.title} imgUrl={mania}/>
+       return <Card key={vid._id} title={vid.title} imgUrl={vid.thumbnail} views={vid.views} date={vid.createdAt}/>
       })}
     </Container>
   )

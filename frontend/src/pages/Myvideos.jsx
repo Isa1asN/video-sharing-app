@@ -10,9 +10,6 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CreateVideo from '../components/CreateVideo'
 import {TailSpin} from 'react-loader-spinner'
 
-
-
-
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
 
@@ -30,8 +27,6 @@ const Wrapper = styled.div`
     gap: 50px;
 
 `
-
-
 
 function Myvideos() {
     const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +73,7 @@ function Myvideos() {
         { loading ? <div style={{alignItems:'center'}}><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
         :
         reversedVids.map((vid) => {
-            return <Card key={vid._id} title={vid.title}/>
+            return <Card key={vid._id} title={vid.title} imgUrl={vid.thumbnail}/>
         })}
     </Container>
     </>
