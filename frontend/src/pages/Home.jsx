@@ -27,7 +27,7 @@ function Home() {
       // console.log(response)
       if (response.status === 200) {
         dispatch(setVideos(response.data))
-        console.log("Videos fetched")
+        // console.log("Videos fetched")
       }
       else {
         console.log(response.message)
@@ -41,7 +41,7 @@ function Home() {
   return (
     <Container>
       {videos.map((vid) => {
-       return <Card key={vid._id} title={vid.title} imgUrl={vid.thumbnail} views={vid.views} date={vid.createdAt}/>
+       return <Card key={vid._id} userId={vid.userId} title={vid.title} imgUrl={vid.thumbnail} views={vid.views} date={vid.createdAt}/>
       })}
     </Container>
   )

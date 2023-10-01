@@ -2,6 +2,9 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import moment from 'moment'
+// import axios from "axios"
+
+// const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '300px'};
@@ -52,16 +55,30 @@ const Info = styled.div`
 
 `
 
-function Card({type, title, imgUrl, views, date}) {
+function Card({type, userId, title, imgUrl, views, date}) {
+    // const response = await client.get(`/u/${userId}`)
+    // try {
+    //   // let userinfo = null
+    // if (response.status === 200) {
+    //   // userinfo = response.data
+    //   console.log('userinfo fetch success')
+    // }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    console.log(userId)
+    
+
+
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
     <Container type={type} >
-      <Image src={imgUrl} type={type} /  >
+      <Image src={imgUrl} type={type} / >
       <Details type={type}>
           <ChannelImage type={type}/>
           <Texts>
             <Title>{title} </Title>
-            <ChannelName > Esu presents</ChannelName>
+            <ChannelName > userinfo.name</ChannelName>
             <Info> {views} views | {moment(date).fromNow()}</Info>
           </Texts>
       </Details>
