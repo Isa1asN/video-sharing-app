@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import moment from 'moment'
 
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '300px'};
@@ -61,7 +62,7 @@ function Card({type, title, imgUrl, views, date}) {
           <Texts>
             <Title>{title} </Title>
             <ChannelName > Esu presents</ChannelName>
-            <Info> {views} views | {date}</Info>
+            <Info> {views} views | {moment(date).fromNow()}</Info>
           </Texts>
       </Details>
     </Container>

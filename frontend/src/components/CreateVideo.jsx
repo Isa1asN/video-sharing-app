@@ -12,10 +12,10 @@ const storageRef = storage.ref();
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyNjM5YWNkYTU1ODg1Zjc0YTk5NDMiLCJlbWFpbCI6ImVzdUBnbWFpbC5jb20iLCJpYXQiOjE2OTU5NTYxODEsImV4cCI6MTY5NTk2Njk4MX0.hMTqsqcvtm5g7VdEeiDJTsRRioQcc184Ki6MRPSoEA4'
+
 
 const config = {
-    headers : {Authorization : `Bearer ${token}`}
+    headers : {Authorization : `Bearer ${localStorage.getItem('t')}`}
 }
 
 const Container = styled.div`
