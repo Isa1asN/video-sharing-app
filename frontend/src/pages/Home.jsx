@@ -13,7 +13,7 @@ import mania from '../assets/mania.jfif'
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap:28px ;
+    gap:30px ;
 `
 
 function Home() {

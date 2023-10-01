@@ -16,7 +16,7 @@ const client = axios.create({baseURL : 'http://localhost:3004/api'})
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap:28px ;
+    gap:30px ;
 `
 const Wrapper = styled.div`
     display: flex;
