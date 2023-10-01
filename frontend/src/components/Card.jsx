@@ -58,9 +58,9 @@ const Info = styled.div`
 function Card({type, userId, title, imgUrl, views, date}) {
     // const response = await client.get(`/u/${userId}`)
     // try {
-    //   // let userinfo = null
+      // let userinfo = null
     // if (response.status === 200) {
-    //   // userinfo = response.data
+      // userinfo = response.data
     //   console.log('userinfo fetch success')
     // }
     // } catch (error) {
