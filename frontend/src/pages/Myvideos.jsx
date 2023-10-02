@@ -59,6 +59,8 @@ function Myvideos() {
 
     }, [dispatch])
     const reversedVids = [...myVids].reverse();
+  console.log(reversedVids.length)
+
 
   return (<>
     <Wrapper>

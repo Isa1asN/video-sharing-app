@@ -42,11 +42,12 @@ function History() {
 
   let history = [...hisV].reverse();
 
-  return isHistory ? (
+  return history ? (
     <Container>
       {history.map((vid, index) => (
+        
         <Card
-          key={index} // Using array index as a key, be cautious with this approach
+          key={index} 
           title={vid.title}
           userId={vid.userId}
           views={vid.views}
