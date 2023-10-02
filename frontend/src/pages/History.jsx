@@ -23,7 +23,7 @@ function History() {
     useEffect(()=>{
         const fetchHistory = async () => {
             try {
-                const response = client.get('v/history', {
+                const response = await client.get('/v/history', {
                     headers : {
                         Authorization : `Bearer ${localStorage.getItem('t')}`
                     }
@@ -43,12 +43,16 @@ function History() {
     }, [dispatch])
 
   return (
+        hisV ?
     <Container>
         {
         history.map((vid) => {
             return <Card key={vid._id} title={vid.title} userId={vid.userId} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
-        })}
+        })
+        }
     </Container>
+    :
+    <center><div>No data to display </div></center>
   )
 }
 
