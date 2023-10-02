@@ -106,6 +106,7 @@ export const getHistory = async (req, res) => {
     try {
         const user = await User.findById(req.user._id)
         const hist = user.history
+        if (!hist) {res.status(404).send("No history has been found")}
         const history = await Promise.all(hist.map(async (vidId) => {
             const vid = Video.findById(vidId)
             return vid

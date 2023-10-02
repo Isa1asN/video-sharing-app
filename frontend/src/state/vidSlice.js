@@ -6,6 +6,7 @@ const vidSlice = createSlice({
         videos : [],
         myVideos : [],
         history : [],
+        isHistory : true
     },
     reducers : {
         setVideos : (state, action) => {
@@ -19,6 +20,9 @@ const vidSlice = createSlice({
         },
         setHistory : (state, action) => {
             state.history.push(action.payload)
+        },
+        setIsHistory : (state, action ) => {
+            state.isHistory = action.payload
         }
     },
 

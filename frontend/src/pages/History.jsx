@@ -19,6 +19,7 @@ function History() {
 
     const hisV = useSelector((state) => state.video.history)
     const dispatch = useDispatch()
+    console.log(hisV)
     const history = [...hisV].reverse()
     useEffect(()=>{
         const fetchHistory = async () => {
@@ -31,8 +32,9 @@ function History() {
                 if (response.status === 200){
                     dispatch(setHistory(response.data))
                 }
-                else {
-                    console.log("An error occured")
+                else if (response.status === 404) {
+                    // console.log("An error occured or no history")
+                    dispatch(setHistory([]))
                 }
             } catch (error) {
                 console.log(error)
