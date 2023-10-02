@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import moment from 'moment'
 import axios from "axios"
+// import { useEffect, useState } from "react"
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -57,20 +58,22 @@ const Info = styled.div`
 
 function Card({type, userId, title, imgUrl, views, date}) {
 
-  let userInfo = null
+  // const [userInfo, setUserInfo] = useState(null)
 
-  const fetchUserInfo = async () => {
-    try {
-        const response = await client.get(`/u/${userId}`)
-        if(response.status ===200) {
-           userInfo = response.data
-          //  console.log("user info fetch success")
-        }
-      } catch (error) {
-        console.log(error)
-      }
-  }
-  fetchUserInfo()
+  // const fetchUserInfo = async () => {
+  //   try {
+  //       const response = await client.get(`/u/${userId}`)
+  //       if(response.status ===200) {
+  //          setUserInfo(response.data)
+  //         //  console.log("user info fetch success")
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  // }
+  //   if(!userInfo){
+  //     fetchUserInfo()
+  //   }
    
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
@@ -80,7 +83,7 @@ function Card({type, userId, title, imgUrl, views, date}) {
           <ChannelImage type={type}/>
           <Texts>
             <Title>{title} </Title>
-            <ChannelName > {userInfo.name} </ChannelName>
+            <ChannelName > {userId} </ChannelName>
             <Info> {views} views | {moment(date).fromNow()}</Info>
           </Texts>
       </Details>

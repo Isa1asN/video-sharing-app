@@ -36,6 +36,16 @@ function Home() {
       console.log(error)
     }
   }
+  const userInfoForVideos = async () => {
+    try {
+      let modifiedVideos = videos.map(async (vid) => {
+        const response = await client.get(`/u/${vid.userId}`)
+        return {vid, response}
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   fetchvids()
   }, [dispatch])
   return (
