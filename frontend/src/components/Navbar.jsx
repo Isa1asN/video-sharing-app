@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import newuser from '../assets/newuser.png'
 
 const Container = styled.div`
     position: sticky;
@@ -57,29 +58,32 @@ const Loginbtn = styled.button`
         background-color: #3ac6a6;
         color: black;
     }
-
+`
+const ChannelImage = styled.img`
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #363e2b;
+    border: 1.7px solid #3ac6a6;
+    display: ${(props) => props.type === 'sm' && 'none'};
 `
 const UserLabel = styled.div`
     background-color: transparent;
     color: #3ac6a6;
     padding: 5px 10px;
-    border: 1px solid #3ac6a6;
     cursor: pointer;
     font-weight: 500;
     /* margin: 10px 20px; */
     display: flex;
     align-items: center;
-    gap: 5px;
-    &:hover{
-        background-color: #3ac6a6;
-        color: black;
-    }
+    gap: 10px;
+    font-size: 14px;
 
 `
 
 function Navbar() {
   const user = useSelector((state) => state.user.user.user)
-  console.log(user)
+  // console.log(user)
   return (
     <Container>
       <Wrapper>
@@ -90,7 +94,8 @@ function Navbar() {
         <Link to={'signin'} style={{textDecoration:'none', color:'inherit'}}>
         {user ? 
         <UserLabel>
-          {user.name}
+          <ChannelImage src={newuser}/>
+          {user.name.split(' ')[0]}
         </UserLabel>
         :
           <Loginbtn> 
