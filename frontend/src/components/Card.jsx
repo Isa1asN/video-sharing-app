@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import moment from 'moment'
 import axios from "axios"
-// import { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import newuser from '../assets/newuser.png'
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -58,33 +59,44 @@ const Info = styled.div`
 
 function Card({type, userId, title, imgUrl, views, date}) {
 
-  // const [userInfo, setUserInfo] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
 
-  // const fetchUserInfo = async () => {
-  //   try {
-  //       const response = await client.get(`/u/${userId}`)
-  //       if(response.status ===200) {
-  //          setUserInfo(response.data)
-  //         //  console.log("user info fetch success")
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  // }
-  //   if(!userInfo){
-  //     fetchUserInfo()
-  //   }
+  const fetchUserInfo = async () => {
+    try {
+        const response = await client.get(`/u/${userId}`)
+        if(response.status ===200) {
+           setUserInfo(response.data)
+          //  console.log("user info fetch success")
+        }
+      } catch (error) {
+        console.log(error)
+      }
+  }
+  useEffect(()=>{
+    if(!userInfo){
+      fetchUserInfo()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo])
    
   return (
     <Link to={'video/test'} style={{textDecoration:'none'}}>
     <Container type={type} >
       <Image src={imgUrl} type={type} / >
       <Details type={type}>
-          <ChannelImage type={type}/>
+        {userInfo ? 
+          <ChannelImage src={userInfo.img ? userInfo.img : newuser} type={type}/> : true
+        }
           <Texts>
             <Title>{title} </Title>
-            <ChannelName > {userId} </ChannelName>
-            <Info> {views} views | {moment(date).fromNow()}</Info>
+            {userInfo ? (
+              <>
+                <ChannelName>{userInfo.name}</ChannelName>
+                <Info>
+                  {views} views | {moment(date).fromNow()}
+                </Info>
+              </>
+            ) : true}
           </Texts>
       </Details>
     </Container>

@@ -46,7 +46,7 @@ function Myvideos() {
                 })
                 if (response.status === 200) {
                     dispatch(setMyVideos(response.data))
-                    console.log("Myvideos fetched")
+                    // console.log("Myvideos fetched")
                 }
                 else {
                     console.log(response.status)
@@ -73,7 +73,7 @@ function Myvideos() {
         { loading ? <div style={{alignItems:'center'}}><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
         :
         reversedVids.map((vid) => {
-            return <Card key={vid._id} title={vid.title} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
+            return <Card key={vid._id} title={vid.title} userId={vid.userId} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
         })}
     </Container>
     </>
