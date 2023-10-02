@@ -11,7 +11,7 @@ import Home from './pages/Home';
 import Video from './pages/Video';
 import Signin from './pages/Signin';
 import Myvideos from './pages/Myvideos';
-
+import History from './pages/history';
 
 const Container = styled.div`
   display:flex;       
@@ -45,6 +45,7 @@ function App() {
                 <Route path=':id' element={<Video />} />
               </Route>
               <Route path='myvideos' element={<Myvideos />}/>
+              <Route path='history' element={<History />}/>
             </Route>
           </Routes>
         </Body>

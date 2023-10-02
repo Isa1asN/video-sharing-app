@@ -14,6 +14,7 @@ import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import StarsIcon from '@mui/icons-material/Stars';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     flex:1.3;
@@ -71,6 +72,7 @@ const Loginbtn = styled.button`
 `
 
 function Menu({darkmode, setDarkmode}) {
+    const user = useSelector((state) => state.user.user.user)
   return (
     <Container>
        <Wrapper>
@@ -105,15 +107,19 @@ function Menu({darkmode, setDarkmode}) {
             <FavoriteBorderIcon />
             Liked videos
         </Item>
-        <Item>
-            <HistoryIcon />
-            History
-        </Item>
+        <Link to={'history'} style={{color: 'inherit', textDecoration: 'none'}}> 
+            <Item>
+                <HistoryIcon />
+                History
+            </Item>
+        </Link>
         <Item>
             <SettingsIcon />
             Settings
         </Item>
         <hr style={{border:'0.5px solid #373737'}} />
+        { !user ?
+        <>
         <Login>
             Sign in to like videos & comment
             <Link to={'signin'} style={{textDecoration:'none', color:'inherit'}}>
@@ -122,7 +128,10 @@ function Menu({darkmode, setDarkmode}) {
             </Loginbtn>
             </Link>
         </Login>
-        <hr style={{border:'0.5px solid #373737'}} />
+            <hr style={{border:'0.5px solid #373737'}} />
+        </>
+        : true
+        }
         <Item onClick={() => setDarkmode(!darkmode)}>
             {darkmode ? <ToggleOnIcon /> : <ToggleOffIcon />}
             Dark mode

@@ -5,6 +5,7 @@ const vidSlice = createSlice({
     initialState : {
         videos : [],
         myVideos : [],
+        history : [],
     },
     reducers : {
         setVideos : (state, action) => {
@@ -15,10 +16,13 @@ const vidSlice = createSlice({
         },
         addNewVideo : (state, action) => {
             state.myVideos.push(action.payload)
+        },
+        setHistory : (state, action) => {
+            state.history.push(action.payload)
         }
     },
 
 })
 
-export const {setVideos, setMyVideos, addNewVideo} = vidSlice.actions
+export const {setVideos, setMyVideos, addNewVideo, setHistory} = vidSlice.actions
 export default vidSlice.reducer;
