@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     position: sticky;
@@ -58,8 +59,27 @@ const Loginbtn = styled.button`
     }
 
 `
+const UserLabel = styled.div`
+    background-color: transparent;
+    color: #3ac6a6;
+    padding: 5px 10px;
+    border: 1px solid #3ac6a6;
+    cursor: pointer;
+    font-weight: 500;
+    /* margin: 10px 20px; */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    &:hover{
+        background-color: #3ac6a6;
+        color: black;
+    }
+
+`
 
 function Navbar() {
+  const user = useSelector((state) => state.user.user.user)
+  console.log(user)
   return (
     <Container>
       <Wrapper>
@@ -68,9 +88,15 @@ function Navbar() {
           <SearchIcon />
         </Search>
         <Link to={'signin'} style={{textDecoration:'none', color:'inherit'}}>
+        {user ? 
+        <UserLabel>
+          {user.name}
+        </UserLabel>
+        :
           <Loginbtn> 
             <AccountCircleIcon /> Sign in
           </Loginbtn>
+        } 
         </Link>
       </Wrapper>
     </Container>
