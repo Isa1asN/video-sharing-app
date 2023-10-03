@@ -62,7 +62,7 @@ export const likeVideoById = async(req, res) => {
         const vidId = req.params.id
         const video = await Video.findOneAndUpdate({_id : vidId}, {$inc : {likes : 1}}, {new : true})
         const user = await User.findOneAndUpdate({_id : req.user._id}, {$push : {likedVideos : vidId}})
-        res.status(200).json(video)
+        res.status(200).send("Liked video")
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
@@ -139,7 +139,7 @@ export const addTohistory = async (req, res) => {
         const user = await User.findById(req.user._id)
         user.history.push(vidId)
         await user.save()
-        
+
         res.status(200).send("Added to history")
     } catch (error) {
         console.log(error)
