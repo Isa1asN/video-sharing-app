@@ -32,5 +32,5 @@ const vidSlice = createSlice({
 
 })
 
-export const {setVideos, setMyVideos, addNewVideo, setHistory, setWatchList} = vidSlice.actions
+export const {setVideos, setMyVideos, addNewVideo, setHistory, setWatchList, setLikedVideos} = vidSlice.actions
 export default vidSlice.reducer;

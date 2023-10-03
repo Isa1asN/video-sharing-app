@@ -17,15 +17,16 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap:30px ;
+    color: ${({theme}) => theme.text};
+
 `
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: ${({theme}) => theme.text};
     gap: 50px;
-
+    color: ${({theme}) => theme.text};
 `
 
 function Myvideos() {
@@ -71,11 +72,17 @@ function Myvideos() {
     <CreateVideo isOpen={isOpen} setIsOpen={setIsOpen} setLoading={setLoading}/>
 
     <Container>
-        { loading ? <div style={{alignItems:'center'}}><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
+        {reversedVids.length !==0 ?
+        <>
+        { loading ? <div><TailSpin color="#3ac6a6"  height={100} width={100}/></div>
         :
         reversedVids.map((vid) => {
             return <Card key={vid._id} title={vid.title} userId={vid.userId} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
         })}
+        </>
+        : 
+        <center><div>You haven`t uploaded any videos yet</div></center>
+    }
     </Container>
     </>
   )

@@ -106,10 +106,12 @@ function Menu({darkmode, setDarkmode}) {
             <StarsIcon />
             Following
         </Item>
-        <Item>
-            <FavoriteBorderIcon />
-            Liked videos
-        </Item>
+        <Link to={'likedvideos'} style={{color: 'inherit', textDecoration: 'none'}}> 
+            <Item>
+                <FavoriteBorderIcon />
+                Liked videos
+            </Item>
+        </Link>
         <Link to={'history'} style={{color: 'inherit', textDecoration: 'none'}}> 
             <Item>
                 <HistoryIcon />
