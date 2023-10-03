@@ -12,6 +12,7 @@ import Video from './pages/Video';
 import Signin from './pages/Signin';
 import Myvideos from './pages/Myvideos';
 import History from './pages/history';
+import Watchlist from './pages/WatchList'
 
 const Container = styled.div`
   display:flex;       
@@ -46,6 +47,7 @@ function App() {
               </Route>
               <Route path='myvideos' element={<Myvideos />}/>
               <Route path='history' element={<History />}/>
+              <Route path='watchlist' element={<Watchlist />}/>
             </Route>
           </Routes>
         </Body>

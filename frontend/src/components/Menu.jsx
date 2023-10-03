@@ -95,10 +95,13 @@ function Menu({darkmode, setDarkmode}) {
                 My videos
             </Item>
         </Link>
-        <Item>
-            <AccessTimeIcon />
-            Watch later
-        </Item>
+
+        <Link to={'watchlist'} style={{color: 'inherit', textDecoration: 'none'}}> 
+            <Item>
+                <AccessTimeIcon />
+                Watch later
+            </Item>
+        </Link>
         <Item>
             <StarsIcon />
             Following

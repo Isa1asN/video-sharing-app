@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Card from "../components/Card"
 import axios from 'axios'
-import { setHistory } from '../state/vidSlice'
+import { setWatchList } from '../state/vidSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -30,7 +30,7 @@ function Watchlist() {
                     }
                 })
                 if (response.status === 200) {
-                    dispatch(setHistory(response.data))
+                    dispatch(setWatchList(response.data))
                 }
                 else {
                     console.log(response.status)
@@ -53,7 +53,7 @@ function Watchlist() {
                 return <Card key={vid._id} title={vid.title} userId={vid.userId} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
             })
             :
-            <center><div style={{alignItems:'center'}}>You haven`t watched any videos</div></center>
+            <center><div style={{alignItems:'center'}}>Your watchlist is empty</div></center>
         }
     </Container>
   )
