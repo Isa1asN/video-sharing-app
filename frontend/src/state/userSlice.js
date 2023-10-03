@@ -5,7 +5,7 @@ const userSlice = createSlice({
     initialState : {
         user : {},
         following : [],
-        profile : ''
+        profile : {}
     },
     reducers : {
         setUser : (state, action) => {

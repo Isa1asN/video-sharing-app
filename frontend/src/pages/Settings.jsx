@@ -3,6 +3,14 @@
 import styled from "styled-components"
 import moment from 'moment'
 import newuser from '../assets/newuser.png'
+import axios from "axios"
+import { setProfile } from "../state/userSlice"
+import { UseSelector, useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+
+const client = axios.create({baseURL : 'http://localhost:3004/api'})
+
+
 
 const Container = styled.div`
     display: flex;
@@ -40,8 +48,17 @@ const Text = styled.h5`
     margin: 5px 25px;
 `
 
+
+
 // eslint-disable-next-line react/prop-types
 function UserCard({name, email, followers, img, joined}) {
+    const dispatch = useDispatch()
+    let profile = useSelector((state) => state.user.profile)
+
+    
+
+
+
   return (
     <Container>
         <Wrapper>
