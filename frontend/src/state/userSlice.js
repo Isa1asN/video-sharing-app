@@ -4,7 +4,8 @@ const userSlice = createSlice({
     name : 'user',
     initialState : {
         user : {},
-        following : []
+        following : [],
+        profile : ''
     },
     reducers : {
         setUser : (state, action) => {
@@ -12,8 +13,11 @@ const userSlice = createSlice({
         },
         setFollowing : (state, action) => {
             state.following = action.payload
+        },
+        setProfile : (state, action) => {
+            state.profile = action.payload
         }
     }
 })
-export const {setUser, setFollowing} = userSlice.actions
+export const {setUser, setFollowing, setProfile} = userSlice.actions
 export default userSlice.reducer

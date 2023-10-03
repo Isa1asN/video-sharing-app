@@ -120,10 +120,12 @@ function Menu({darkmode, setDarkmode}) {
                 History
             </Item>
         </Link>
-        <Item>
-            <SettingsIcon />
-            Settings
-        </Item>
+        <Link to={'profile'} style={{color: 'inherit', textDecoration: 'none'}}> 
+            <Item>
+                <SettingsIcon />
+                Settings
+            </Item>
+        </Link>
         <hr style={{border:'0.5px solid #373737'}} />
         { !user ?
         <>
