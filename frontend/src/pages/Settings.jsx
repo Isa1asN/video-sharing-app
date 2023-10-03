@@ -6,6 +6,7 @@ import newuser from '../assets/newuser.png'
 import axios from "axios"
 import { setProfile } from "../state/userSlice"
 import {useDispatch, useSelector } from "react-redux"
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useEffect } from "react"
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -22,16 +23,17 @@ const Container = styled.div`
     width: 100%;
     border-radius: 15px;
     box-shadow: 2px 2px 6px #3ac6a6;
+    height: 70vh;
 `
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
     color: ${({theme}) => theme.text};
 `
 const ChannelImage = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     background-color: #363e2b;
     border: 1.7px solid #3ac6a6;
@@ -44,6 +46,22 @@ const Text = styled.h5`
     margin: 5px 25px;
 `
 
+const ImageInput = styled.input`
+    color: ${({theme}) => theme.textSof};
+
+`
+const Uploadimgtxt = styled.h4`
+    /* font-size: 14px; */
+    color: ${({theme}) => theme.text};
+    margin-top: 19px;
+`
+const Uploadbtn = styled.button`
+    height: max-content;
+    font-size: larger;
+    background-color: #3ac6a6;
+    border: none;
+    border-radius: 5px;
+`
 
 
 // eslint-disable-next-line react/prop-types
@@ -78,12 +96,17 @@ function Settings() {
     <Container>
         {Object.keys(userSigned).length !== 0 ?
         <>
+        <center>
         <Wrapper>
-            <ChannelImage src={profile.img ? profile.img : newuser} />
+            <div> <ChannelImage src={profile.img ? profile.img : newuser} /> </div>
             <h3 style={{alignContent:'center'}}>{profile.name}</h3>
         </Wrapper>
         <Text>{profile.email}</Text>
-        <Text>{profile.followers} followers | Joined {moment(profile.createdAt).fromNow()}</Text>   
+        <Text>{profile.followers} followers | Joined {moment(profile.createdAt).fromNow()}</Text>
+        <Uploadimgtxt>upload profile image</Uploadimgtxt>
+        <ImageInput type="file"/>
+        <Text>  <Uploadbtn> Upload </Uploadbtn></Text>
+        </center>   
         </>
         :
         <div style={{color:'#3ac6a6'}}>You haven`t signed up</div>
