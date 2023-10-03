@@ -139,6 +139,7 @@ export const addTohistory = async (req, res) => {
         const user = await User.findById(req.user._id)
         user.history.push(vidId)
         await user.save()
+        
         res.status(200).send("Added to history")
     } catch (error) {
         console.log(error)
