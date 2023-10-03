@@ -21,10 +21,6 @@ const Container = styled.div`
     border: 1px solid #3ac6a6;
     width: 100%;
     border-radius: 15px;
-    cursor: pointer;
-    &:hover{
-        border:2px solid #3ac6a6;
-    }
     box-shadow: 2px 2px 6px #3ac6a6;
 `
 const Wrapper = styled.div`
@@ -51,7 +47,7 @@ const Text = styled.h5`
 
 
 // eslint-disable-next-line react/prop-types
-function Settings({name, email, followers, img, joined}) {
+function Settings() {
     const dispatch = useDispatch()
     const userSigned = useSelector((state) => state.user.user)
     const profile = useSelector((state) => state.user.profile)
@@ -59,7 +55,11 @@ function Settings({name, email, followers, img, joined}) {
     useEffect(()=>{
         const fetchProfile = async () => {
             try {
-                const response = await client.get('/u/profile')
+                const response = await client.get('/u/profile', {
+                    headers : {
+                        Authorization : `Bearer ${localStorage.getItem('t')}`
+                    }
+                })
                 if (response.status === 200){
                     dispatch(setProfile(response.data))
                 } else {
@@ -72,11 +72,23 @@ function Settings({name, email, followers, img, joined}) {
         }
         fetchProfile()
     }, [dispatch])
-    console.log("You are here")
 
   return (
 
-    <div>hi</div>
+    <Container>
+        {Object.keys(userSigned).length !== 0 ?
+        <>
+        <Wrapper>
+            <ChannelImage src={profile.img ? profile.img : newuser} />
+            <h3 style={{alignContent:'center'}}>{profile.name}</h3>
+        </Wrapper>
+        <Text>{profile.email}</Text>
+        <Text>{profile.followers} followers | Joined {moment(profile.createdAt).fromNow()}</Text>   
+        </>
+        :
+        <div style={{color:'#3ac6a6'}}>You haven`t signed up</div>
+    }
+    </Container>
   )
 }
 
