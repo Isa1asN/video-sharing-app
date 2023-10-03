@@ -1,66 +1,72 @@
-// import React from 'react';
-import styled from 'styled-components';
-import Card from '../components/Card';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { setHistory, setIsHistory } from '../state/vidSlice';
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import Card from "../components/Card"
+import axios from 'axios'
+import { setHistory, setMyVideos } from '../state/vidSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CreateVideo from '../components/CreateVideo'
+import {TailSpin} from 'react-loader-spinner'
 
-const client = axios.create({ baseURL: 'http://localhost:3004/api' });
+const client = axios.create({baseURL : 'http://localhost:3004/api'})
+
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-`;
+    display: flex;
+    flex-wrap: wrap;
+    gap:30px ;
+    color: ${({theme}) => theme.text};
+
+`
+
 
 function History() {
-  const hisV = useSelector((state) => state.video.history);
-  const isHistory = useSelector((state) => state.video.isHistory);
-  const dispatch = useDispatch();
+    const [isOpen, setIsOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        const response = await client.get('/v/history', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('t')}`,
-          },
-        });
-        if (response.status === 200) {
-          dispatch(setIsHistory(true));
-          dispatch(setHistory(response.data));
-        } else if (response.status === 404) {
-          dispatch(setIsHistory(false));
+    const dispatch = useDispatch()
+    const history = useSelector((state) => state.video.history)
+
+    useEffect(() => {
+        const fetchHist = async () => {
+            try {
+
+                const response = await client.get('/v/history', {
+                    headers : {
+                        Authorization : `Bearer ${localStorage.getItem('t')}`
+                    }
+                })
+                if (response.status === 200) {
+                    dispatch(setHistory(response.data))
+                    // console.log("Myvideos fetched")
+                }
+                else {
+                    console.log(response.status)
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchHistory();
-  }, [dispatch]);
+    fetchHist()
 
-  let history = [...hisV].reverse();
+    }, [dispatch])
+    const reversedVids = [...history].reverse();
+//   console.log(reversedVids.length)
 
-  return history ? (
+
+  return (
     <Container>
-      {history.map((vid, index) => (
-        
-        <Card
-          key={index} 
-          title={vid.title}
-          userId={vid.userId}
-          views={vid.views}
-          imgUrl={vid.thumbnail}
-          date={vid.createdAt}
-        />
-      ))}
+        {
+            reversedVids.length !== 0 ? 
+            reversedVids.map((vid) => {
+                return <Card key={vid._id} title={vid.title} userId={vid.userId} views={vid.views} imgUrl={vid.thumbnail} date={vid.createdAt}/>
+            })
+            :
+            <center><div>No data to display</div></center>
+        }
     </Container>
-  ) : (
-    <center>
-      <div>No data to display </div>
-    </center>
-  );
-}
-
-export default History;
+  )
+  }
+export default History
