@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import Card from "../components/Card"
 import axios from 'axios'
 import { setFollowing } from '../state/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import UserCard from '../components/UserCard'
+
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -49,7 +50,9 @@ function Following() {
     <Container>
         {
             reversedlist.length !== 0 ? 
-            <div>Hello</div>
+            reversedlist.map((user) => {
+                return <UserCard key={user._id} name={user.name} email={user.email} followers={user.followers} joined={user.createdAt}/>
+            })
             :
             <center><div style={{alignItems:'center'}}>You haven`t followed anyone yet </div></center>
         }

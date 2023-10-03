@@ -47,7 +47,7 @@ export const followUserById = async (req, res) => {
             { $push: { following: followedId } }, 
             { new: true } 
         );
-        res.status(200).json(followedUser)
+        res.status(200).send("Followed user")
     } catch (error) {
         console.log(error)
         res.status(500).send("An error occured")
@@ -60,7 +60,7 @@ export const getFollowingUsers = async (req, res) => {
         const user = await User.findById(userId)
         const follow_list = user.following 
         const following_users = await Promise.all(follow_list.map(async (userId) => {
-            const user = await User.findById(userId).select('name email followers img')
+            const user = await User.findById(userId).select('name email followers img createdAt')
             return user
         }))
         res.status(200).json(following_users)
