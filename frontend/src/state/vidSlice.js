@@ -7,6 +7,7 @@ const vidSlice = createSlice({
         myVideos : [],
         history : [],
         watchlist : [],
+        likedvideos : [],
     },
     reducers : {
         setVideos : (state, action) => {
@@ -23,6 +24,9 @@ const vidSlice = createSlice({
         },
         setWatchList : (state, action) => {
             state.watchlist = action.payload
+        },
+        setLikedVideos : (state, action) => {
+            state.likedvideos = action.payload
         }
     },
 
