@@ -15,7 +15,7 @@ import History from './pages/history';
 import Watchlist from './pages/WatchList'
 import Likedvideos from './pages/LikedVideos';
 import Following from './pages/Following';
-import Settings from '@mui/icons-material/Settings';
+import Settings from './pages/Settings';
 
 const Container = styled.div`
   display:flex;       

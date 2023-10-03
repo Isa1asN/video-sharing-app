@@ -5,7 +5,7 @@ import moment from 'moment'
 import newuser from '../assets/newuser.png'
 import axios from "axios"
 import { setProfile } from "../state/userSlice"
-import { UseSelector, useDispatch, useSelector } from "react-redux"
+import {useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -51,24 +51,33 @@ const Text = styled.h5`
 
 
 // eslint-disable-next-line react/prop-types
-function UserCard({name, email, followers, img, joined}) {
+function Settings({name, email, followers, img, joined}) {
     const dispatch = useDispatch()
-    let profile = useSelector((state) => state.user.profile)
+    const userSigned = useSelector((state) => state.user.user)
+    const profile = useSelector((state) => state.user.profile)
 
-    
-
-
+    useEffect(()=>{
+        const fetchProfile = async () => {
+            try {
+                const response = await client.get('/u/profile')
+                if (response.status === 200){
+                    dispatch(setProfile(response.data))
+                } else {
+                    console.log(" An error has occured")
+                }
+            
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchProfile()
+    }, [dispatch])
+    console.log("You are here")
 
   return (
-    <Container>
-        <Wrapper>
-            <ChannelImage src={img ? img : newuser} />
-            <h3 style={{alignContent:'center'}}>{name}</h3>
-        </Wrapper>
-        <Text>{email}</Text>
-        <Text>{followers} followers | Joined {moment(joined).fromNow()}</Text>        
-    </Container>
+
+    <div>hi</div>
   )
 }
 
-export default UserCard
+export default Settings
