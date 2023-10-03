@@ -14,6 +14,7 @@ import Myvideos from './pages/Myvideos';
 import History from './pages/history';
 import Watchlist from './pages/WatchList'
 import Likedvideos from './pages/LikedVideos';
+import Following from './pages/Following';
 
 const Container = styled.div`
   display:flex;       
@@ -50,6 +51,7 @@ function App() {
               <Route path='history' element={<History />}/>
               <Route path='watchlist' element={<Watchlist />}/>
               <Route path='likedvideos' element={<Likedvideos />}/>
+              <Route path='following' element={<Following />}/>
             </Route>
           </Routes>
         </Body>

@@ -49,7 +49,7 @@ function Following() {
     <Container>
         {
             reversedlist.length !== 0 ? 
-            
+            <div>Hello</div>
             :
             <center><div style={{alignItems:'center'}}>You haven`t followed anyone yet </div></center>
         }
