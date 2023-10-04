@@ -80,7 +80,7 @@ function Card({type, userId, title, imgUrl, views, date}) {
   }, [userInfo])
    
   return (
-    <Link to={'video/test'} style={{textDecoration:'none'}}>
+    <Link to={'video/6519e969dccb74d3130af6ff'} style={{textDecoration:'none'}}>
     <Container type={type} >
       <Image src={imgUrl} type={type} / >
       <Details type={type}>

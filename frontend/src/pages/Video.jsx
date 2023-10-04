@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { setFetchedVideos } from "../state/vidSlice";
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
 import testVideo from '../assets/theweeknd.mp4'
 
 const Container = styled.div`
@@ -104,13 +105,13 @@ const VideoPlayer = styled.video`
   
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
-const url = window.location.href.split('/')
-// const vidId = url[url.length-1]
-const vidId = '6519e969dccb74d3130af6ff'
+
 // console.log(vidId)
 
 
 function Video() {
+  const url = window.location.href.split('/')
+  const vidId = url[url.length-1]
   const fetchedVid = useSelector((state) => state.video.fetchedVideo)
   const dispatch = useDispatch()
 
@@ -128,8 +129,8 @@ function Video() {
         }
     }
     fetchVideo()
-  }, [dispatch])
-  console.log(fetchedVid)
+  }, [dispatch, vidId])
+  // console.log(fetchedVid)
 
 
 
@@ -144,9 +145,9 @@ function Video() {
                 Your browser doesn`t support the video tag
             </VideoPlayer>
         </VideoWrapper>
-        <Title>Test Video- The Weeknd</Title>
+        <Title>{fetchedVid.title}</Title>
         <Details>
-          <Info>7,001 views | Jul 2022</Info>
+          <Info>{fetchedVid.views} views | {moment(fetchedVid.createdAt).fromNow()}</Info>
           <Buttons>
             <Button><FavoriteIcon /> <small>12</small></Button>
             <Button><ShareIcon /></Button>
@@ -161,7 +162,9 @@ function Video() {
               <ChannelName>Esu presents</ChannelName>
               <ChannelCounter>3002 Followers</ChannelCounter>
               <Description>
-                Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m Lorem ipsum dolor lore m ipsu m 
+                {fetchedVid.tags}
+                <br />
+                {fetchedVid.description}
               </Description>
             </ChannelDetail>
           </ChannelInfo>
