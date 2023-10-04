@@ -26,7 +26,6 @@ const Recommendation = styled.div`
   flex: 2;
 `
 const VideoWrapper = styled.div`
-  
 `
 const Title = styled.h1`
   font-size: 18px;
@@ -105,6 +104,7 @@ const Description = styled.p`
 `
 const VideoPlayer = styled.video`
   border-radius: 25px;
+  box-shadow: 0px 0px 22px #197d65;
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -181,7 +181,8 @@ function Video() {
               <ChannelName>{userInfo.name}</ChannelName>
               <ChannelCounter>{userInfo.followers} Followers</ChannelCounter>
               <Description>
-                {fetchedVid.tags}
+                <label style={{color:'#197d65'}}>{fetchedVid.tags}</label>
+                <br />
                 <br />
                 {fetchedVid.description}
               </Description>
