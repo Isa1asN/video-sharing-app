@@ -11,6 +11,7 @@ import { setFetchedVideos } from "../state/vidSlice";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
 import moment from 'moment'
+import newuser from '../assets/newuser.png'
 import testVideo from '../assets/theweeknd.mp4'
 
 const Container = styled.div`
@@ -175,7 +176,7 @@ function Video() {
         <hr />
         <Channel>
           <ChannelInfo>
-            <Image src={propic} />
+            <Image src={userInfo.img?userInfo.img:newuser} />
             <ChannelDetail>
               <ChannelName>{userInfo.name}</ChannelName>
               <ChannelCounter>{userInfo.followers} Followers</ChannelCounter>
