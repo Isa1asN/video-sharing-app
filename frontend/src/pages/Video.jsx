@@ -99,7 +99,7 @@ const ChannelCounter = styled.span`
 const Description = styled.p`
   font-size: 14px;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   width: 100%;
   background-color:  ${({theme}) => theme.bgLi};
 `
