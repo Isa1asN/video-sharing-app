@@ -134,6 +134,22 @@ function Video() {
       console.log(error);
     }
   };
+  const likeVideo = async (id) => {
+    try {
+      const response = await client.post(`/v/${id}/like`, {
+        headers : {
+          Authorization : `Bearer ${localStorage.getItem('t')}`
+      }
+      });
+      if (response.status === 200) {
+        console.log('video liked')
+      } else {
+        console.log(response.status)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,6 +179,7 @@ function Video() {
       setIsLiked(false)
 
     } else {
+      likeVideo(vidId)
       dispatch(setLike(vidId))
       dispatch(setNumLikes(1))
       setIsLiked(true)
