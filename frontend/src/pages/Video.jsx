@@ -7,6 +7,8 @@ import propic from '../assets/c.jpg'
 import Comments from "../components/Comments";
 import axios from 'axios'
 import { useEffect } from "react";
+import { setFetchedVideos } from "../state/vidSlice";
+import { useDispatch, useSelector } from 'react-redux'
 import testVideo from '../assets/theweeknd.mp4'
 
 const Container = styled.div`
@@ -103,20 +105,31 @@ const VideoPlayer = styled.video`
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 const url = window.location.href.split('/')
-const vidId = url[url.length-1]
+// const vidId = url[url.length-1]
+const vidId = '6519e969dccb74d3130af6ff'
 // console.log(vidId)
 
 
 function Video() {
-  // useEffect(()=>{
-  //   const fetchVideo = async () => {
-  //       try {
-  //         const response = client.get(`/v/${vidId}`)
-  //       } catch (error) {
-  //           console.log(error)
-  //       }
-  //   }
-  // }, [])
+  const fetchedVid = useSelector((state) => state.video.fetchedVideo)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    const fetchVideo = async () => {
+        try {
+          const response = await client.get(`/v/${vidId}`)
+          if (response.status===200){
+            dispatch(setFetchedVideos(response.data))
+          } else {
+            console.log(response.status)
+          }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    fetchVideo()
+  }, [dispatch])
+  console.log(fetchedVid)
 
 
 
