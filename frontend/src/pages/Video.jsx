@@ -5,7 +5,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
 import propic from '../assets/c.jpg'
 import Comments from "../components/Comments";
-import Card from "../components/Card";
+import axios from 'axios'
+import { useEffect } from "react";
 import testVideo from '../assets/theweeknd.mp4'
 
 const Container = styled.div`
@@ -100,15 +101,34 @@ const Description = styled.p`
 const VideoPlayer = styled.video`
   
 `
+const client = axios.create({baseURL : 'http://localhost:3004/api'})
+const url = window.location.href.split('/')
+const vidId = url[url.length-1]
+// console.log(vidId)
 
 
 function Video() {
+  // useEffect(()=>{
+  //   const fetchVideo = async () => {
+  //       try {
+  //         const response = client.get(`/v/${vidId}`)
+  //       } catch (error) {
+  //           console.log(error)
+  //       }
+  //   }
+  // }, [])
+
+
+
   return (
     <Container>
       <Content>
         <VideoWrapper>
             <VideoPlayer controls>
-                <source src={testVideo} type="video/mp4/mkv"/>
+                <source src={testVideo} type="video/mp4"/>
+                <source src={testVideo} type="video/x-matroska"/>
+                <source src={testVideo} type="video/3gp"/>
+                Your browser doesn`t support the video tag
             </VideoPlayer>
         </VideoWrapper>
         <Title>Test Video- The Weeknd</Title>
