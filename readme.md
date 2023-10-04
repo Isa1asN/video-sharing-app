@@ -10,11 +10,15 @@
 
         git clone https://github.com/Isa1asN/video-sharing-app.git
 
-cd video-sharing-app
-npm install
-npm run dev
+#### For the client
 
-cd video-sharing-app
-npm install 
-nodemon index.js
+        cd frontend
+        npm install
+        npm run dev
+
+#### For the server
+
+        cd server
+        npm install 
+        nodemon index.js
 
