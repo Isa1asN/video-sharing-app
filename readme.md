@@ -1,6 +1,6 @@
 # Vidlit - video sharing app 
 
-## Vidlit is an open source web application that allows users to upload, watch, and share videos online. It is built with React, Node.js, MongoDB, and Firebase
+## Vidlit is a web application that allows users to upload, watch, and share videos online. It is built with React, Node.js, MongoDB, and Firebase
 
 ## Installation
 
