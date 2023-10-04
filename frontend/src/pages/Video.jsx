@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { setFetchedVideos } from "../state/vidSlice";
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from "react";
 import moment from 'moment'
 import testVideo from '../assets/theweeknd.mp4'
 
@@ -102,7 +103,7 @@ const Description = styled.p`
   background-color:  ${({theme}) => theme.bgLi};
 `
 const VideoPlayer = styled.video`
-  
+  border-radius: 25px;
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -110,27 +111,49 @@ const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
 
 function Video() {
+  const [userInfo, setUserInfo] = useState(null)
+
   const url = window.location.href.split('/')
   const vidId = url[url.length-1]
   const fetchedVid = useSelector((state) => state.video.fetchedVideo)
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    const fetchVideo = async () => {
-        try {
-          const response = await client.get(`/v/${vidId}`)
-          if (response.status===200){
-            dispatch(setFetchedVideos(response.data))
-          } else {
-            console.log(response.status)
-          }
-        } catch (error) {
-            console.log(error)
-        }
+  const fetchUserInfo = async (id) => {
+    try {
+      const response = await client.get(`/u/${id}`);
+      if (response.status === 200) {
+        setUserInfo(response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    fetchVideo()
-  }, [dispatch, vidId])
-  // console.log(fetchedVid)
+  };
+
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await client.get(`/v/${vidId}`);
+        if (response.status === 200) {
+          dispatch(setFetchedVideos(response.data));
+        } else {
+          console.log(response.status);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchData = async () => {
+      await fetchVideo();
+      if (!userInfo) {
+        await fetchUserInfo(fetchedVid.userId);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, vidId, fetchedVid.userId, userInfo]);
+
+      console.log(userInfo)
 
 
 
@@ -159,7 +182,7 @@ function Video() {
           <ChannelInfo>
             <Image src={propic} />
             <ChannelDetail>
-              <ChannelName>Esu presents</ChannelName>
+              <ChannelName>userInfo.name</ChannelName>
               <ChannelCounter>3002 Followers</ChannelCounter>
               <Description>
                 {fetchedVid.tags}
