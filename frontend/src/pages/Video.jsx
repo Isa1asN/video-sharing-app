@@ -104,7 +104,7 @@ const Description = styled.p`
   background-color:  ${({theme}) => theme.bgLi};
 `
 const VideoPlayer = styled.video`
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 0px 0px 22px #197d65;
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
