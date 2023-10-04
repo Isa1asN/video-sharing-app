@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { setFetchedVideos } from "../state/vidSlice";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
+import { setLike } from "../state/userSlice";
 import moment from 'moment'
 import newuser from '../assets/newuser.png'
 import testVideo from '../assets/theweeknd.mp4'
@@ -119,6 +120,10 @@ function Video() {
   const fetchedVid = useSelector((state) => state.video.fetchedVideo)
   const dispatch = useDispatch()
 
+  //  dispatch(setLike(fetchedVid.likes))
+  // const vidNumLikes = useSelector((state)=> state.video.videoLikes)
+  const listLiked = useSelector((state)=>state.user.likedVideos)
+
   
   const fetchUserInfo = async (id) => {
     try {
@@ -149,8 +154,12 @@ function Video() {
     fetchData();
   }, [dispatch, vidId]);
 
-      // console.log(userInfo)
 
+  async function handleLike (){
+      dispatch(setLike(vidId))
+      // videoLikes += 1
+      console.log(listLiked)
+  }
 
 
   return (
@@ -168,7 +177,7 @@ function Video() {
         <Details>
           <Info>{fetchedVid.views} views | {moment(fetchedVid.createdAt).fromNow()}</Info>
           <Buttons>
-            <Button><FavoriteIcon /> <small>{fetchedVid.likes}</small></Button>
+            <Button onClick={handleLike}><FavoriteIcon /> <small>{}</small></Button>
             <Button><ShareIcon /></Button>
             <Button><DownloadIcon /></Button>
           </Buttons>

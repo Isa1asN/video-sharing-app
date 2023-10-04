@@ -9,6 +9,7 @@ const vidSlice = createSlice({
         watchlist : [],
         likedvideos : [],
         fetchedVideo : [],
+        videoLikes : [],
     },
     reducers : {
         setVideos : (state, action) => {
@@ -31,10 +32,16 @@ const vidSlice = createSlice({
         },
         setFetchedVideos : (state, action) => {
             state.fetchedVideo = action.payload
+        },
+        setVideoLikes : (state, action) => {
+            state.videoLikes = action.payload
+        },
+        setNumLikes : (state, action) => {
+            state.videoLikes += action.payload
         }
     },
 
 })
 
-export const {setVideos, setMyVideos, addNewVideo, setHistory, setWatchList, setLikedVideos, setFetchedVideos} = vidSlice.actions
+export const {setVideos, setMyVideos, addNewVideo, setHistory, setWatchList, setLikedVideos, setFetchedVideos, setVideoLikes, setNumLikes} = vidSlice.actions
 export default vidSlice.reducer;

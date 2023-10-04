@@ -5,7 +5,8 @@ const userSlice = createSlice({
     initialState : {
         user : {},
         following : [],
-        profile : {}
+        profile : {},
+        likedVideos : [],
     },
     reducers : {
         setUser : (state, action) => {
@@ -16,8 +17,17 @@ const userSlice = createSlice({
         },
         setProfile : (state, action) => {
             state.profile = action.payload
+        },
+        setLike: (state, action) => {
+            const index = state.likedVideos.indexOf(action.payload);
+            if (index !== -1) {
+                state.likedVideos.splice(index, 1); 
+            } else {
+                state.likedVideos.push(action.payload);
+            }
         }
+
     }
 })
-export const {setUser, setFollowing, setProfile} = userSlice.actions
+export const {setUser, setFollowing, setProfile, setLike} = userSlice.actions
 export default userSlice.reducer
