@@ -111,13 +111,14 @@ const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
 
 function Video() {
-  const [userInfo, setUserInfo] = useState(null)
+  const [userInfo, setUserInfo] = useState('')
 
   const url = window.location.href.split('/')
   const vidId = url[url.length-1]
   const fetchedVid = useSelector((state) => state.video.fetchedVideo)
   const dispatch = useDispatch()
 
+  
   const fetchUserInfo = async (id) => {
     try {
       const response = await client.get(`/u/${id}`);
@@ -130,11 +131,12 @@ function Video() {
   };
 
   useEffect(() => {
-    const fetchVideo = async () => {
+    const fetchData = async () => {
       try {
         const response = await client.get(`/v/${vidId}`);
         if (response.status === 200) {
           dispatch(setFetchedVideos(response.data));
+          await fetchUserInfo(response.data.userId);
         } else {
           console.log(response.status);
         }
@@ -143,17 +145,10 @@ function Video() {
       }
     };
 
-    const fetchData = async () => {
-      await fetchVideo();
-      if (!userInfo) {
-        await fetchUserInfo(fetchedVid.userId);
-      }
-    };
-
     fetchData();
-  }, [dispatch, vidId, fetchedVid.userId, userInfo]);
+  }, [dispatch, vidId]);
 
-      console.log(userInfo)
+      // console.log(userInfo)
 
 
 
@@ -172,9 +167,9 @@ function Video() {
         <Details>
           <Info>{fetchedVid.views} views | {moment(fetchedVid.createdAt).fromNow()}</Info>
           <Buttons>
-            <Button><FavoriteIcon /> <small>12</small></Button>
+            <Button><FavoriteIcon /> <small>{fetchedVid.likes}</small></Button>
             <Button><ShareIcon /></Button>
-            <Button><DownloadIcon /> <small></small></Button>
+            <Button><DownloadIcon /></Button>
           </Buttons>
         </Details>
         <hr />
@@ -182,8 +177,8 @@ function Video() {
           <ChannelInfo>
             <Image src={propic} />
             <ChannelDetail>
-              <ChannelName>userInfo.name</ChannelName>
-              <ChannelCounter>3002 Followers</ChannelCounter>
+              <ChannelName>{userInfo.name}</ChannelName>
+              <ChannelCounter>{userInfo.followers} Followers</ChannelCounter>
               <Description>
                 {fetchedVid.tags}
                 <br />
