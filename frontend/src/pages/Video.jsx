@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -5,6 +6,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import propic from '../assets/c.jpg'
 import Comments from "../components/Comments";
 import Card from "../components/Card";
+import testVideo from '../assets/theweeknd.mp4'
 
 const Container = styled.div`
   display: flex;
@@ -95,6 +97,9 @@ const Description = styled.p`
   width: 100%;
   background-color:  ${({theme}) => theme.bgLi};
 `
+const VideoPlayer = styled.video`
+  
+`
 
 
 function Video() {
@@ -102,7 +107,9 @@ function Video() {
     <Container>
       <Content>
         <VideoWrapper>
-        <iframe width="90%" height="360" src="https://www.youtube.com/embed/u9n7Cw-4_HQ?si=E0laqkAeVqxhTuWz" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <VideoPlayer controls>
+                <source src={testVideo} type="video/mp4/mkv"/>
+            </VideoPlayer>
         </VideoWrapper>
         <Title>Test Video- The Weeknd</Title>
         <Details>
@@ -131,9 +138,10 @@ function Video() {
         <Comments />
       </Content>
       <Recommendation>
+        {/* <Card type="sm"/>
         <Card type="sm"/>
-        <Card type="sm"/>
-        <Card type="sm"/>
+        <Card type="sm"/> */}
+        <div style={{color: 'lightgreen'}}>recommended vids</div>
       </Recommendation>
     </Container>
   )
