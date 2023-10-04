@@ -3,11 +3,10 @@ import styled from "styled-components"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
-import propic from '../assets/c.jpg'
 import Comments from "../components/Comments";
 import axios from 'axios'
 import { useEffect } from "react";
-import { setFetchedVideos } from "../state/vidSlice";
+import { setFetchedVideos, setNumLikes, setVideoLikes } from "../state/vidSlice";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
 import { setLike } from "../state/userSlice";
@@ -120,8 +119,8 @@ function Video() {
   const fetchedVid = useSelector((state) => state.video.fetchedVideo)
   const dispatch = useDispatch()
 
-  //  dispatch(setLike(fetchedVid.likes))
-  // const vidNumLikes = useSelector((state)=> state.video.videoLikes)
+  const [isLiked, setIsLiked] = useState(false)
+  const vidNumLikes = useSelector((state)=> state.video.videoLikes)
   const listLiked = useSelector((state)=>state.user.likedVideos)
 
   
@@ -142,6 +141,7 @@ function Video() {
         const response = await client.get(`/v/${vidId}`);
         if (response.status === 200) {
           dispatch(setFetchedVideos(response.data));
+          dispatch(setVideoLikes(response.data.likes))
           await fetchUserInfo(response.data.userId);
         } else {
           console.log(response.status);
@@ -156,9 +156,17 @@ function Video() {
 
 
   async function handleLike (){
+    const index = listLiked.indexOf(vidId);
+    if (index !== -1) {
       dispatch(setLike(vidId))
-      // videoLikes += 1
-      console.log(listLiked)
+      dispatch(setNumLikes(-1))
+      setIsLiked(false)
+
+    } else {
+      dispatch(setLike(vidId))
+      dispatch(setNumLikes(1))
+      setIsLiked(true)
+    }
   }
 
 
@@ -177,7 +185,7 @@ function Video() {
         <Details>
           <Info>{fetchedVid.views} views | {moment(fetchedVid.createdAt).fromNow()}</Info>
           <Buttons>
-            <Button onClick={handleLike}><FavoriteIcon /> <small>{}</small></Button>
+            <Button onClick={handleLike}><FavoriteIcon style={{color:`${isLiked?'red':'inherit'}`}} /> <small>{vidNumLikes}</small></Button>
             <Button><ShareIcon /></Button>
             <Button><DownloadIcon /></Button>
           </Buttons>
