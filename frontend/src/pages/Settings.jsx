@@ -4,10 +4,14 @@ import styled from "styled-components"
 import moment from 'moment'
 import newuser from '../assets/newuser.png'
 import axios from "axios"
-import { setProfile } from "../state/userSlice"
+import { setProfile, setProfilePic } from "../state/userSlice"
 import {useDispatch, useSelector } from "react-redux"
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useEffect } from "react"
+import storage from '../firebaseConfig';
+
+const storageRef = storage.ref();
+
+
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -70,6 +74,28 @@ function Settings() {
     const userSigned = useSelector((state) => state.user.user)
     const profile = useSelector((state) => state.user.profile)
 
+    const handleImgUpload = async () =>{
+        try {
+            let fileInput = document.getElementById('pro-img')
+            const file = fileInput.files[0]
+            let imgUrl = ''
+    
+            const imgSnapshot = await storageRef.child('images/' + file.name).put(file)
+            imgUrl = await imgSnapshot.ref.getDownloadURL();
+
+            const response = await client.post('/u/profile/uploadImg', {
+                imgUrl : imgUrl
+            }, {
+                headers : {Authorization : `Bearer ${localStorage.getItem('t')}`}
+            })
+            if (response.status) {
+                console.log("Profile image updated successfully")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(()=>{
         const fetchProfile = async () => {
             try {
@@ -104,8 +130,8 @@ function Settings() {
         <Text>{profile.email}</Text>
         <Text>{profile.followers} followers | Joined {moment(profile.createdAt).fromNow()}</Text>
         <Uploadimgtxt>upload profile image</Uploadimgtxt>
-        <ImageInput type="file"/>
-        <Text>  <Uploadbtn> Upload </Uploadbtn></Text>
+        <ImageInput id="pro-img" type="file"/>
+        <Text>  <Uploadbtn onClick={handleImgUpload}> Upload </Uploadbtn></Text>
         </center>   
         </>
         :
