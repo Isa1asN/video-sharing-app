@@ -5,6 +5,7 @@ import moment from 'moment'
 import axios from "axios"
 import { useEffect, useState } from "react"
 import newuser from '../assets/newuser.png'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 
@@ -40,10 +41,12 @@ const Texts = styled.div`
 
 `
 const Title = styled.h1`
+  display: flex;
+  gap: 8rem;
   font-size: 14px;
   font-weight: 500;
   color: ${({theme}) => theme.text};
-
+  flex-grow: 1;
 `
 const ChannelName = styled.h2`
   font-size: 14px;
@@ -66,6 +69,7 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
         const response = await client.get(`/u/${userId}`)
         if(response.status ===200) {
            setUserInfo(response.data)
+          //  await client.get() request to view the video
           //  console.log("user info fetch success")
         }
       } catch (error) {
@@ -88,7 +92,7 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
           <ChannelImage src={userInfo.img ? userInfo.img : newuser} type={type}/> : true
         }
           <Texts>
-            <Title>{title} </Title>
+            <Title><div>{title}</div> <AddCircleOutlineIcon style={{color:'#3ac6a6'}} /> </Title>
             {userInfo ? (
               <>
                 <ChannelName>{userInfo.name}</ChannelName>
