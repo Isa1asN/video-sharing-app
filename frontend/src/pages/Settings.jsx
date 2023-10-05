@@ -132,7 +132,7 @@ function Settings() {
         </Wrapper>
         <Text>{profile.email}</Text>
         <Text>{profile.followers} followers | Joined {moment(profile.createdAt).fromNow()}</Text>
-        <Uploadimgtxt>upload profile image</Uploadimgtxt>
+        <Uploadimgtxt>upload/update profile image</Uploadimgtxt>
         <ImageInput id="pro-img" type="file"/>
         <Text>  <Uploadbtn onClick={handleImgUpload}> Upload </Uploadbtn></Text>
         </center>   
