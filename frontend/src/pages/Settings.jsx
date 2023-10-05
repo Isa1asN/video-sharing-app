@@ -73,6 +73,7 @@ function Settings() {
     const dispatch = useDispatch()
     const userSigned = useSelector((state) => state.user.user)
     const profile = useSelector((state) => state.user.profile)
+    const profileImg = useSelector((state)=> state.user.profilePic)
 
     const handleImgUpload = async () =>{
         try {
@@ -89,6 +90,7 @@ function Settings() {
                 headers : {Authorization : `Bearer ${localStorage.getItem('t')}`}
             })
             if (response.status) {
+                dispatch(setProfilePic(imgUrl))
                 console.log("Profile image updated successfully")
             }
         } catch (error) {
@@ -106,6 +108,7 @@ function Settings() {
                 })
                 if (response.status === 200){
                     dispatch(setProfile(response.data))
+                    dispatch(setProfilePic(response.data.img))
                 } else {
                     console.log(" An error has occured")
                 }
@@ -124,7 +127,7 @@ function Settings() {
         <>
         <center>
         <Wrapper>
-            <div> <ChannelImage src={profile.img ? profile.img : newuser} /> </div>
+            <div> <ChannelImage src={profileImg ? profileImg : newuser} /> </div>
             <h3 style={{alignContent:'center'}}>{profile.name}</h3>
         </Wrapper>
         <Text>{profile.email}</Text>
