@@ -41,7 +41,7 @@ function Home() {
   return (
     <Container>
       {videos.map((vid) => {
-       return <Card key={vid._id} userId={vid.userId} title={vid.title} imgUrl={vid.thumbnail} views={vid.views} date={vid.createdAt}/>
+       return <Card key={vid._id} userId={vid.userId} title={vid.title} imgUrl={vid.thumbnail} views={vid.views} date={vid.createdAt} link={vid._id}/>
       })}
     </Container>
   )
