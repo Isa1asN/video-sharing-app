@@ -192,9 +192,9 @@ function Video() {
       <Content>
         <VideoWrapper>
             <VideoPlayer controls>
-                <source src={testVideo} type="video/mp4"/>
-                <source src={testVideo} type="video/x-matroska"/>
-                <source src={testVideo} type="video/3gp"/>
+                <source src={fetchedVid.videoUrl} type="video/mp4"/>
+                <source src={fetchedVid.videoUrl} type="video/x-matroska"/>
+                <source src={fetchedVid.videoUrl} type="video/3gp"/>
                 Your browser doesn`t support the video tag
             </VideoPlayer>
         </VideoWrapper>
