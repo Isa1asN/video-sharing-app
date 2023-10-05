@@ -105,6 +105,7 @@ const Description = styled.p`
 const VideoPlayer = styled.video`
   border-radius: 15px;
   box-shadow: 0px 0px 22px #197d65;
+  width: 100%;
 `
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
 

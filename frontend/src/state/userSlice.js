@@ -5,6 +5,7 @@ const userSlice = createSlice({
     initialState : {
         user : {},
         following : [],
+        profilePic : '',
         profile : {},
         likedVideos : [],
     },
@@ -14,6 +15,9 @@ const userSlice = createSlice({
         },
         setFollowing : (state, action) => {
             state.following = action.payload
+        },
+        setProfilePic : (state, action) => {
+            state.profilePic = action.payload
         },
         setProfile : (state, action) => {
             state.profile = action.payload
@@ -29,5 +33,5 @@ const userSlice = createSlice({
 
     }
 })
-export const {setUser, setFollowing, setProfile, setLike} = userSlice.actions
+export const {setUser, setFollowing, setProfilePic, setProfile, setLike} = userSlice.actions
 export default userSlice.reducer
