@@ -2,6 +2,8 @@
 
 ## Vidlit is a web application that allows users to upload, watch, and share videos online. It is built with React, Node.js, MongoDB, and Firebase
 
+<img src='https://github.com/Isa1asN/video-sharing-app/blob/main/frontend/src/assets/vidlit.png?raw=true' />
+
 ## Installation
 
 ### To run Vidlit locally, you need to have Node.js and MongoDB installed on your machine
