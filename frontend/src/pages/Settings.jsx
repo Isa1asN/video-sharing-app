@@ -52,7 +52,7 @@ const Text = styled.h5`
 
 const ImageInput = styled.input`
     color: ${({theme}) => theme.textSof};
-
+    cursor: pointer;
 `
 const Uploadimgtxt = styled.h4`
     /* font-size: 14px; */
@@ -60,11 +60,14 @@ const Uploadimgtxt = styled.h4`
     margin-top: 19px;
 `
 const Uploadbtn = styled.button`
-    height: max-content;
+    height: 30px;
+    width: max-content;
     font-size: larger;
     background-color: #3ac6a6;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+
 `
 
 
