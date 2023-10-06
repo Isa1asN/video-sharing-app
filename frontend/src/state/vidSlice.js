@@ -38,7 +38,10 @@ const vidSlice = createSlice({
         },
         setNumLikes : (state, action) => {
             state.videoLikes += action.payload
-        }
+        },
+        // addTohistory : (state, action) => {
+        //     state.history.push(action.payload)
+        // }
     },
 
 })

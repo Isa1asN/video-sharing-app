@@ -6,6 +6,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import newuser from '../assets/newuser.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
+import { useDispatch } from "react-redux"
 
 
 const client = axios.create({baseURL : 'http://localhost:3004/api'})
@@ -64,6 +66,8 @@ const Info = styled.div`
 function Card({type, userId, title, imgUrl, views, date, link}) {
 
   const [userInfo, setUserInfo] = useState(null)
+  // const dispatch = useDispatch()
+  const [isAdded, setIsAdded] = useState(false)
 
   const fetchUserInfo = async () => {
     try {
@@ -77,6 +81,23 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
         console.log(error)
       }
   }
+  const addToHistory = async (id) => {
+    try {
+      const response = await client.post(`/v/${id}/addwatchlist`, {},{
+          headers : {
+            Authorization : `Bearer ${localStorage.getItem('t')}`
+          }
+      })
+      if (response.status == 200){
+        setIsAdded(!isAdded)
+        console.log('added to watchlist')
+      } else {
+        console.log(response.status)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(()=>{
     if(!userInfo){
       fetchUserInfo()
@@ -85,18 +106,36 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
   }, [userInfo])
    
   return (
-    <Link to={`video/${link}`} style={{textDecoration:'none'}}>
     <Container type={type} >
-      <Image src={imgUrl} type={type} / >
+      <Link to={`video/${link}`} style={{textDecoration:'none'}}>
+          <Image src={imgUrl} type={type} / >
+      </Link>
+
       <Details type={type}>
         {userInfo ? 
-          <ChannelImage src={userInfo.img ? userInfo.img : newuser} type={type}/> : true
+          <Link to={`video/${link}`} style={{textDecoration:'none', color:'inherit'}}>
+            <ChannelImage src={userInfo.img ? userInfo.img : newuser} type={type}/>
+          </Link>
+             : true
         }
           <Texts>
-            <Title><div>{title}</div> <AddCircleOutlineIcon style={{color:'#3ac6a6'}} /> </Title>
+            <Title>
+          <Link to={`video/${link}`} style={{textDecoration:'none', color:'inherit'}}>
+              <div>{title}</div> 
+          </Link>
+          <div  onClick={}>
+            {isAdded ?
+            <CheckIcon style={{color:'#3ac6a6'}} />
+            :
+              <AddCircleOutlineIcon style={{color:'#3ac6a6'}} /> 
+            }
+          </div>
+              </Title>
             {userInfo ? (
               <>
+              <Link to={`video/${link}`} style={{textDecoration:'none'}}>
                 <ChannelName>{userInfo.name}</ChannelName>
+              </Link>
                 <Info>
                   {views} views | {moment(date).fromNow()}
                 </Info>
@@ -105,7 +144,6 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
           </Texts>
       </Details>
     </Container>
-    </Link>
   )
 }
 
