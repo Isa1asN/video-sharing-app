@@ -123,7 +123,7 @@ function Card({type, userId, title, imgUrl, views, date, link}) {
           <Link to={`video/${link}`} style={{textDecoration:'none', color:'inherit'}}>
               <div>{title}</div> 
           </Link>
-          <div  onClick={}>
+          <div  onClick={()=>addToHistory(link)}>
             {isAdded ?
             <CheckIcon style={{color:'#3ac6a6'}} />
             :
