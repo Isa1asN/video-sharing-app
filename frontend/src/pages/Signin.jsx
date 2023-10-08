@@ -90,8 +90,8 @@ function Signin() {
             }) 
             if(response.status == 200){
                 dispatch(setUser(response.data))
-                setUser(response.data)
                 localStorage.setItem('t', response.data.token)
+                localStorage.setItem('email', logEmail)
                 console.log("Sign in success")
                 setTimeout(() => {
                 }, 3000);
@@ -115,6 +115,8 @@ function Signin() {
             })
             if (response.status == 201){
                 console.log('user Signup success')
+                localStorage.setItem('name', name)
+                localStorage.setItem('email', signUpEmail)
                 setTimeout(() => {
                 }, 3000);
                 navigate("/");

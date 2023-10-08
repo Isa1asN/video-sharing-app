@@ -82,8 +82,8 @@ const UserLabel = styled.div`
 `
 
 function Navbar() {
-  const user = useSelector((state) => state.user.user.user)
-  // console.log(user)
+  const user = localStorage.getItem('name')
+  console.log(user)
   return (
     <Container>
       <Wrapper>
@@ -95,7 +95,7 @@ function Navbar() {
         {user ? 
         <UserLabel>
           <ChannelImage src={newuser}/>
-          {user.name.split(' ')[0]}
+          {user.split(' ')[0]}
         </UserLabel>
         :
           <Loginbtn> 
