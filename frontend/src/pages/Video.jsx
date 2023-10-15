@@ -205,7 +205,7 @@ function Video() {
           <Buttons>
             <Button onClick={handleLike}><FavoriteIcon style={{color:`${isLiked?'red':'inherit'}`}} /> <small>{vidNumLikes}</small></Button>
             <Button><ShareIcon /></Button>
-            <Button><DownloadIcon /></Button>
+            <Button ><a href={fetchedVid.videoUrl} style={{color:'inherit'}}><DownloadIcon /></a></Button>
           </Buttons>
         </Details>
         <hr />
